@@ -1,0 +1,14 @@
+{
+  "name": "listwise",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "test": "node scripts/check-game.mjs",
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate-artifact.mjs"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.13"
+  }
+}
