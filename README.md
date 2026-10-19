@@ -1,4 +1,20 @@
-# Listwise
+# Nearer
+
+A spatial knowledge game. Place stronger connections nearer.
+
+Open the `Nearer` folder in Unity 6.2. Use the Nearer menu to prepare the project, verify the rules and data, or build the browser game. The editor integration package is pinned in the project manifest.
+
+The interface uses a full-screen connection field, circular subject images, five movable topics, and an explanatory reveal. Reveal is available immediately. Each topic has a faint orbit, and selecting it highlights that orbit. After revealing, a right-hand panel shows its shared-link count and examples. Reveal a question, then choose Next. Soft palettes blend between rounds. Keyboard placement, saved progress, an image toggle, and reduced motion are included.
+
+Questions use a culture-focused collection of familiar brands, actors, films, performers, games, and athletes. At least four choices share a context with the center. Occasional wildcards need a substantial real connection. Each sequence rotates across six interests without category menus. The first question is shared each day in UTC. The source collection is finite and frozen with revision links. See `Documentation/DATA.md` for selection rules and the extraction method.
+
+After building, run `npm run nearer` and open the local address printed by the server in Edge. The output is in `Nearer/Builds/Web`. Serve it over HTTP rather than opening the page as a local file.
+
+Run `npm run check:nearer` for game data checks. Use Nearer > Verify rules and data in Unity for scoring, generation, and magnet spacing tests. Run `npm run data:nearer` when intentionally refreshing the source collection. Run `npm run media:nearer` to obtain freely licensed subject images and their credits.
+
+The implementation brief is in `PROMPT.md`. Current milestones and verified results are in `PROGRESSION.md`.
+
+## Original Listwise prototype
 
 A daily, three-minute Wikipedia table guessing game. The Cloudflare Worker discovers list articles through MediaWiki search and proxies article HTML. The browser selects a suitable table column, deduplicates entries, and runs the round. Daily selection is date-seeded in UTC; practice uses a fresh seed. No fixed puzzle schedule or paid API is required.
 

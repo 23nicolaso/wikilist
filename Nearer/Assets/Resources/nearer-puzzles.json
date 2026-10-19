@@ -1,0 +1,788 @@
+{
+  "schema": 1,
+  "epoch": "2026-10-18",
+  "extraction": "Unique article-prose links. Tables, navigation, references and missing pages excluded. Redirects reconciled. Jaccard overlap. Ties within eight percent of the board maximum.",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "puzzles": [
+    {
+      "id": "coffee",
+      "day": 0,
+      "category": "Science and nature",
+      "anchor": "Coffee",
+      "anchorTitle": "Coffee",
+      "anchorRevision": 1380659338,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Coffee&oldid=1380659338",
+      "anchorLinkCount": 242,
+      "tieTolerance": 0.003916083916083916,
+      "informativePairs": 9,
+      "topics": [
+        {
+          "title": "Espresso",
+          "label": "Espresso",
+          "revision": 1380565687,
+          "url": "https://en.wikipedia.org/w/index.php?title=Espresso&oldid=1380565687",
+          "linkCount": 58,
+          "sharedCount": 14,
+          "unionCount": 286,
+          "similarity": 0.04895104895104895,
+          "evidence": [
+            "Caffeine",
+            "Latte",
+            "Coffee in Italy",
+            "Coffeehouse",
+            "Essential oil",
+            "Coffee extraction",
+            "Drip coffee",
+            "Bar (unit)"
+          ]
+        },
+        {
+          "title": "Caffeine",
+          "label": "Caffeine",
+          "revision": 1380382119,
+          "url": "https://en.wikipedia.org/w/index.php?title=Caffeine&oldid=1380382119",
+          "linkCount": 325,
+          "sharedCount": 18,
+          "unionCount": 549,
+          "similarity": 0.03278688524590164,
+          "evidence": [
+            "Coffee bean",
+            "Stimulant",
+            "Decaffeination",
+            "Coffea",
+            "Espresso",
+            "Coffea arabica",
+            "Coffea canephora",
+            "Ottoman Empire"
+          ]
+        },
+        {
+          "title": "Tea",
+          "label": "Tea",
+          "revision": 1380902067,
+          "url": "https://en.wikipedia.org/w/index.php?title=Tea&oldid=1380902067",
+          "linkCount": 329,
+          "sharedCount": 18,
+          "unionCount": 553,
+          "similarity": 0.0325497287522604,
+          "evidence": [
+            "Stimulant",
+            "Caffeine",
+            "French press",
+            "East India Company",
+            "Boston Tea Party",
+            "Tea culture",
+            "Leaf",
+            "Hemiptera"
+          ]
+        },
+        {
+          "title": "Chocolate",
+          "label": "Chocolate",
+          "revision": 1377728169,
+          "url": "https://en.wikipedia.org/w/index.php?title=Chocolate&oldid=1377728169",
+          "linkCount": 253,
+          "sharedCount": 8,
+          "unionCount": 487,
+          "similarity": 0.01642710472279261,
+          "evidence": [
+            "Stimulant",
+            "Caffeine",
+            "Espresso",
+            "United States dollar",
+            "Fair-trade certification",
+            "Fair trade",
+            "Mineral (nutrient)",
+            "Polyphenol"
+          ]
+        },
+        {
+          "title": "Wine",
+          "label": "Wine",
+          "revision": 1379980303,
+          "url": "https://en.wikipedia.org/w/index.php?title=Wine&oldid=1379980303",
+          "linkCount": 210,
+          "sharedCount": 2,
+          "unionCount": 450,
+          "similarity": 0.0044444444444444444,
+          "evidence": [
+            "Dutch East India Company",
+            "Variety (botany)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ocean",
+      "day": 1,
+      "category": "Science and nature",
+      "anchor": "Ocean",
+      "anchorTitle": "Ocean",
+      "anchorRevision": 1379989353,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Ocean&oldid=1379989353",
+      "anchorLinkCount": 447,
+      "tieTolerance": 0.01645021645021645,
+      "informativePairs": 8,
+      "topics": [
+        {
+          "title": "Sea",
+          "label": "Sea",
+          "revision": 1378038170,
+          "url": "https://en.wikipedia.org/w/index.php?title=Sea&oldid=1378038170",
+          "linkCount": 667,
+          "sharedCount": 190,
+          "unionCount": 924,
+          "similarity": 0.20562770562770563,
+          "evidence": [
+            "Saline water",
+            "Earth",
+            "Pacific Ocean",
+            "Atlantic Ocean",
+            "Indian Ocean",
+            "Southern Ocean",
+            "Arctic Ocean",
+            "Bay"
+          ]
+        },
+        {
+          "title": "Coral reef",
+          "label": "Coral reef",
+          "revision": 1380541550,
+          "url": "https://en.wikipedia.org/w/index.php?title=Coral+reef&oldid=1380541550",
+          "linkCount": 336,
+          "sharedCount": 59,
+          "unionCount": 724,
+          "similarity": 0.08149171270718232,
+          "evidence": [
+            "Pacific Ocean",
+            "Atlantic Ocean",
+            "Indian Ocean",
+            "Ocean heat content",
+            "Photosynthesis",
+            "Oceanic crust",
+            "Continental shelf",
+            "Water column"
+          ]
+        },
+        {
+          "title": "River",
+          "label": "River",
+          "revision": 1373574441,
+          "url": "https://en.wikipedia.org/w/index.php?title=River&oldid=1373574441",
+          "linkCount": 276,
+          "sharedCount": 46,
+          "unionCount": 677,
+          "similarity": 0.06794682422451995,
+          "evidence": [
+            "Pacific Ocean",
+            "Atlantic Ocean",
+            "Sea",
+            "Water cycle",
+            "Climate",
+            "Life",
+            "Algae",
+            "Tide"
+          ]
+        },
+        {
+          "title": "Desert",
+          "label": "Desert",
+          "revision": 1374310187,
+          "url": "https://en.wikipedia.org/w/index.php?title=Desert&oldid=1374310187",
+          "linkCount": 403,
+          "sharedCount": 28,
+          "unionCount": 822,
+          "similarity": 0.0340632603406326,
+          "evidence": [
+            "Earth",
+            "Photosynthesis",
+            "Carbon dioxide",
+            "Ecosystem",
+            "River",
+            "Sun",
+            "Plate tectonics",
+            "Mountain range"
+          ]
+        },
+        {
+          "title": "Whale",
+          "label": "Whale",
+          "revision": 1377720929,
+          "url": "https://en.wikipedia.org/w/index.php?title=Whale&oldid=1377720929",
+          "linkCount": 215,
+          "sharedCount": 15,
+          "unionCount": 647,
+          "similarity": 0.023183925811437404,
+          "evidence": [
+            "Sea",
+            "Phytoplankton",
+            "Middle Ages",
+            "Neritic zone",
+            "Knot (unit)",
+            "Tropics",
+            "New York City",
+            "Hydrothermal vent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jazz",
+      "day": 2,
+      "category": "Culture",
+      "anchor": "Jazz",
+      "anchorTitle": "Jazz",
+      "anchorRevision": 1380237943,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Jazz&oldid=1380237943",
+      "anchorLinkCount": 624,
+      "tieTolerance": 0.005841035120147874,
+      "informativePairs": 8,
+      "topics": [
+        {
+          "title": "Blues",
+          "label": "Blues",
+          "revision": 1379874992,
+          "url": "https://en.wikipedia.org/w/index.php?title=Blues&oldid=1379874992",
+          "linkCount": 537,
+          "sharedCount": 79,
+          "unionCount": 1082,
+          "similarity": 0.07301293900184842,
+          "evidence": [
+            "Music genre",
+            "African Americans",
+            "New Orleans",
+            "Blues",
+            "Ragtime",
+            "Harmony",
+            "Spirituals",
+            "Hymn"
+          ]
+        },
+        {
+          "title": "Saxophone",
+          "label": "Saxophone",
+          "revision": 1374839770,
+          "url": "https://en.wikipedia.org/w/index.php?title=Saxophone&oldid=1374839770",
+          "linkCount": 256,
+          "sharedCount": 57,
+          "unionCount": 823,
+          "similarity": 0.0692588092345079,
+          "evidence": [
+            "Blues",
+            "Ragtime",
+            "Vaudeville",
+            "Popular music",
+            "Dixieland jazz",
+            "Swing music",
+            "Big band",
+            "Bebop"
+          ]
+        },
+        {
+          "title": "Rock music",
+          "label": "Rock",
+          "revision": 1380789425,
+          "url": "https://en.wikipedia.org/w/index.php?title=Rock+music&oldid=1380789425",
+          "linkCount": 893,
+          "sharedCount": 37,
+          "unionCount": 1480,
+          "similarity": 0.025,
+          "evidence": [
+            "Music genre",
+            "Blues",
+            "Folk music",
+            "Popular music",
+            "Rhythm and blues",
+            "Gospel music",
+            "Mode (music)",
+            "Jazz fusion"
+          ]
+        },
+        {
+          "title": "Hip-hop",
+          "label": "Hip hop",
+          "revision": 1379997538,
+          "url": "https://en.wikipedia.org/w/index.php?title=Hip-hop&oldid=1379997538",
+          "linkCount": 597,
+          "sharedCount": 25,
+          "unionCount": 1196,
+          "similarity": 0.020903010033444816,
+          "evidence": [
+            "Music genre",
+            "African Americans",
+            "New Orleans",
+            "Blues",
+            "Popular music",
+            "Swing music",
+            "Bebop",
+            "Rhythm and blues"
+          ]
+        },
+        {
+          "title": "Ballet",
+          "label": "Ballet",
+          "revision": 1355152158,
+          "url": "https://en.wikipedia.org/w/index.php?title=Ballet&oldid=1355152158",
+          "linkCount": 112,
+          "sharedCount": 1,
+          "unionCount": 735,
+          "similarity": 0.0013605442176870747,
+          "evidence": [
+            "Classical music"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "japan",
+      "day": 3,
+      "category": "Places and history",
+      "anchor": "Japan",
+      "anchorTitle": "Japan",
+      "anchorRevision": 1380857116,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Japan&oldid=1380857116",
+      "anchorLinkCount": 673,
+      "tieTolerance": 0.006317539484621779,
+      "informativePairs": 9,
+      "topics": [
+        {
+          "title": "Tokyo",
+          "label": "Tokyo",
+          "revision": 1380887300,
+          "url": "https://en.wikipedia.org/w/index.php?title=Tokyo&oldid=1380887300",
+          "linkCount": 625,
+          "sharedCount": 95,
+          "unionCount": 1203,
+          "similarity": 0.07896924355777224,
+          "evidence": [
+            "Prefectures of Japan",
+            "Capital of Japan",
+            "List of cities in Japan",
+            "Japanese Paleolithic",
+            "Emperor of Japan",
+            "Shogun",
+            "Daimyo",
+            "Samurai"
+          ]
+        },
+        {
+          "title": "Samurai",
+          "label": "Samurai",
+          "revision": 1380388198,
+          "url": "https://en.wikipedia.org/w/index.php?title=Samurai&oldid=1380388198",
+          "linkCount": 224,
+          "sharedCount": 48,
+          "unionCount": 849,
+          "similarity": 0.05653710247349823,
+          "evidence": [
+            "Shogun",
+            "Daimyo",
+            "Muromachi period",
+            "Sengoku period",
+            "Tokugawa shogunate",
+            "Sakoku",
+            "Perry Expedition",
+            "Bakumatsu"
+          ]
+        },
+        {
+          "title": "South Korea",
+          "label": "South Korea",
+          "revision": 1380576522,
+          "url": "https://en.wikipedia.org/w/index.php?title=South+Korea&oldid=1380576522",
+          "linkCount": 684,
+          "sharedCount": 43,
+          "unionCount": 1314,
+          "similarity": 0.03272450532724505,
+          "evidence": [
+            "East Asia",
+            "Sea of Japan",
+            "East China Sea",
+            "Japanese archipelago",
+            "Empire of Japan",
+            "Korea under Japanese rule",
+            "Surrender of Japan",
+            "Major non-NATO ally"
+          ]
+        },
+        {
+          "title": "Brazil",
+          "label": "Brazil",
+          "revision": 1380239625,
+          "url": "https://en.wikipedia.org/w/index.php?title=Brazil&oldid=1380239625",
+          "linkCount": 856,
+          "sharedCount": 37,
+          "unionCount": 1492,
+          "similarity": 0.024798927613941018,
+          "evidence": [
+            "List of countries and dependencies by population",
+            "Major non-NATO ally",
+            "Great power",
+            "List of countries by GDP (nominal)",
+            "Portuguese Empire",
+            "Jesuits",
+            "League of Nations",
+            "Nazi Germany"
+          ]
+        },
+        {
+          "title": "Anime",
+          "label": "Anime",
+          "revision": 1379986700,
+          "url": "https://en.wikipedia.org/w/index.php?title=Anime&oldid=1379986700",
+          "linkCount": 357,
+          "sharedCount": 22,
+          "unionCount": 1008,
+          "similarity": 0.021825396825396824,
+          "evidence": [
+            "East Asia",
+            "Japanese asset price bubble",
+            "Japanese robotics",
+            "Culture of Japan",
+            "Japanese popular culture",
+            "Manga",
+            "Japanese cuisine",
+            "Video games in Japan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "volcano",
+      "day": 4,
+      "category": "Science and nature",
+      "anchor": "Volcano",
+      "anchorTitle": "Volcano",
+      "anchorRevision": 1380352685,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Volcano&oldid=1380352685",
+      "anchorLinkCount": 293,
+      "tieTolerance": 0.008210526315789474,
+      "informativePairs": 9,
+      "topics": [
+        {
+          "title": "Lava",
+          "label": "Lava",
+          "revision": 1378579913,
+          "url": "https://en.wikipedia.org/w/index.php?title=Lava&oldid=1378579913",
+          "linkCount": 126,
+          "sharedCount": 39,
+          "unionCount": 380,
+          "similarity": 0.10263157894736842,
+          "evidence": [
+            "Crust (geology)",
+            "Volcanic ash",
+            "Mantle plume",
+            "Hotspot (geology)",
+            "Magma",
+            "Earth's mantle",
+            "Seabed",
+            "Subduction"
+          ]
+        },
+        {
+          "title": "Geyser",
+          "label": "Geyser",
+          "revision": 1377829328,
+          "url": "https://en.wikipedia.org/w/index.php?title=Geyser&oldid=1377829328",
+          "linkCount": 130,
+          "sharedCount": 30,
+          "unionCount": 393,
+          "similarity": 0.07633587786259542,
+          "evidence": [
+            "Cryovolcano",
+            "Magma",
+            "British English",
+            "Convection",
+            "Iceland",
+            "Subduction",
+            "Silicon dioxide",
+            "Jupiter"
+          ]
+        },
+        {
+          "title": "Mountain",
+          "label": "Mountain",
+          "revision": 1355628335,
+          "url": "https://en.wikipedia.org/w/index.php?title=Mountain&oldid=1355628335",
+          "linkCount": 146,
+          "sharedCount": 16,
+          "unionCount": 423,
+          "similarity": 0.037825059101654845,
+          "evidence": [
+            "Crust (geology)",
+            "Mid-ocean ridge",
+            "Hotspot (geology)",
+            "Magma",
+            "Volcanism",
+            "Convection",
+            "Adiabatic process",
+            "Subduction"
+          ]
+        },
+        {
+          "title": "Earthquake",
+          "label": "Earthquake",
+          "revision": 1379800890,
+          "url": "https://en.wikipedia.org/w/index.php?title=Earthquake&oldid=1379800890",
+          "linkCount": 179,
+          "sharedCount": 15,
+          "unionCount": 457,
+          "similarity": 0.03282275711159737,
+          "evidence": [
+            "Divergent boundary",
+            "Convergent boundary",
+            "Ring of Fire",
+            "Transform fault",
+            "Magma",
+            "Volcanism",
+            "Lithosphere",
+            "Oceanic crust"
+          ]
+        },
+        {
+          "title": "Glacier",
+          "label": "Glacier",
+          "revision": 1380217339,
+          "url": "https://en.wikipedia.org/w/index.php?title=Glacier&oldid=1380217339",
+          "linkCount": 204,
+          "sharedCount": 9,
+          "unionCount": 488,
+          "similarity": 0.018442622950819672,
+          "evidence": [
+            "British English",
+            "American English",
+            "Igneous rock",
+            "Ice cap",
+            "Carbon dioxide",
+            "Erosion",
+            "Antarctica",
+            "Mars"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cinema",
+      "day": 5,
+      "category": "Culture",
+      "anchor": "Cinema",
+      "anchorTitle": "Film",
+      "anchorRevision": 1377565646,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Film&oldid=1377565646",
+      "anchorLinkCount": 305,
+      "tieTolerance": 0.005663716814159292,
+      "informativePairs": 9,
+      "topics": [
+        {
+          "title": "Cinematography",
+          "label": "Cinematography",
+          "revision": 1379557354,
+          "url": "https://en.wikipedia.org/w/index.php?title=Cinematography&oldid=1379557354",
+          "linkCount": 179,
+          "sharedCount": 32,
+          "unionCount": 452,
+          "similarity": 0.07079646017699115,
+          "evidence": [
+            "Film",
+            "Persistence of vision",
+            "Entertainment",
+            "Phenakistoscope",
+            "Zoetrope",
+            "Photography",
+            "Photographic emulsion",
+            "Exposure (photography)"
+          ]
+        },
+        {
+          "title": "Animation",
+          "label": "Animation",
+          "revision": 1379999951,
+          "url": "https://en.wikipedia.org/w/index.php?title=Animation&oldid=1379999951",
+          "linkCount": 256,
+          "sharedCount": 32,
+          "unionCount": 529,
+          "similarity": 0.06049149338374291,
+          "evidence": [
+            "Film",
+            "Persistence of vision",
+            "Entertainment",
+            "Shadow play",
+            "Magic lantern",
+            "Stroboscopic effect",
+            "Phenakistoscope",
+            "Zoetrope"
+          ]
+        },
+        {
+          "title": "Television",
+          "label": "Television",
+          "revision": 1380566010,
+          "url": "https://en.wikipedia.org/w/index.php?title=Television&oldid=1380566010",
+          "linkCount": 442,
+          "sharedCount": 20,
+          "unionCount": 727,
+          "similarity": 0.027510316368638238,
+          "evidence": [
+            "Stereoscopy",
+            "Western Electric",
+            "Black and white",
+            "Polarized 3D system",
+            "Celebrity",
+            "Broadcast programming",
+            "Product placement",
+            "Advertising"
+          ]
+        },
+        {
+          "title": "Photography",
+          "label": "Photography",
+          "revision": 1379059042,
+          "url": "https://en.wikipedia.org/w/index.php?title=Photography&oldid=1379059042",
+          "linkCount": 226,
+          "sharedCount": 12,
+          "unionCount": 519,
+          "similarity": 0.023121387283236993,
+          "evidence": [
+            "Visual arts",
+            "Film",
+            "Camera",
+            "Camera obscura",
+            "Photographic emulsion",
+            "Exposure (photography)",
+            "Photographic film",
+            "Movie camera"
+          ]
+        },
+        {
+          "title": "Theatre",
+          "label": "Theatre",
+          "revision": 1373717645,
+          "url": "https://en.wikipedia.org/w/index.php?title=Theatre&oldid=1373717645",
+          "linkCount": 392,
+          "sharedCount": 7,
+          "unionCount": 690,
+          "similarity": 0.010144927536231883,
+          "evidence": [
+            "Literature",
+            "Shadow play",
+            "Vaudeville",
+            "Dialogue",
+            "Culture",
+            "Actor",
+            "Audience"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bicycle",
+      "day": 6,
+      "category": "Places and history",
+      "anchor": "Bicycle",
+      "anchorTitle": "Bicycle",
+      "anchorRevision": 1375091239,
+      "anchorUrl": "https://en.wikipedia.org/w/index.php?title=Bicycle&oldid=1375091239",
+      "anchorLinkCount": 249,
+      "tieTolerance": 0.010610079575596818,
+      "informativePairs": 9,
+      "topics": [
+        {
+          "title": "Cycling",
+          "label": "Cycling",
+          "revision": 1379055725,
+          "url": "https://en.wikipedia.org/w/index.php?title=Cycling&oldid=1379055725",
+          "linkCount": 178,
+          "sharedCount": 50,
+          "unionCount": 377,
+          "similarity": 0.13262599469496023,
+          "evidence": [
+            "Human-powered transport",
+            "Bicycle pedal",
+            "Bicycle frame",
+            "Transport",
+            "Recreation",
+            "Commuting",
+            "Police bicycle",
+            "Bicycle messenger"
+          ]
+        },
+        {
+          "title": "Mountain bike",
+          "label": "Mountain bike",
+          "revision": 1375222084,
+          "url": "https://en.wikipedia.org/w/index.php?title=Mountain+bike&oldid=1375222084",
+          "linkCount": 45,
+          "sharedCount": 13,
+          "unionCount": 281,
+          "similarity": 0.046263345195729534,
+          "evidence": [
+            "Bicycle wheel",
+            "Bicycle frame",
+            "E-bike",
+            "Bicycle brake",
+            "Mountain biking",
+            "Cruiser bicycle",
+            "Tandem bicycle",
+            "Bicycle fork"
+          ]
+        },
+        {
+          "title": "Motorcycle",
+          "label": "Motorcycle",
+          "revision": 1379167729,
+          "url": "https://en.wikipedia.org/w/index.php?title=Motorcycle&oldid=1379167729",
+          "linkCount": 171,
+          "sharedCount": 13,
+          "unionCount": 407,
+          "similarity": 0.03194103194103194,
+          "evidence": [
+            "Bicycle pedal",
+            "Safety bicycle",
+            "Chain drive",
+            "Velocipede",
+            "Coventry",
+            "Motor vehicle",
+            "Countersteering",
+            "Stoppie"
+          ]
+        },
+        {
+          "title": "Car",
+          "label": "Car",
+          "revision": 1379863088,
+          "url": "https://en.wikipedia.org/w/index.php?title=Car&oldid=1379863088",
+          "linkCount": 351,
+          "sharedCount": 14,
+          "unionCount": 586,
+          "similarity": 0.023890784982935155,
+          "evidence": [
+            "Cycling",
+            "Commuting",
+            "Mannheim",
+            "Horse-drawn vehicle",
+            "Motor vehicle",
+            "Walking",
+            "Aluminium",
+            "Carbon fiber reinforced polymer"
+          ]
+        },
+        {
+          "title": "Train",
+          "label": "Train",
+          "revision": 1375704845,
+          "url": "https://en.wikipedia.org/w/index.php?title=Train&oldid=1375704845",
+          "linkCount": 193,
+          "sharedCount": 3,
+          "unionCount": 439,
+          "similarity": 0.00683371298405467,
+          "evidence": [
+            "Steel",
+            "Traffic congestion",
+            "Car"
+          ]
+        }
+      ]
+    }
+  ]
+}
