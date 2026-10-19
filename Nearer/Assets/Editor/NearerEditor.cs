@@ -205,6 +205,21 @@ namespace Nearer.Editor
                 Check(Mathf.Abs(arranged[i].magnitude-wanted[i].magnitude)<0.001f,"Collision layout preserves distance");
                 for(int j=i+1;j<5;j++)Check(MagnetLayout.Overlap(new Rect(arranged[i]-boxes[i]*0.5f,boxes[i]),new Rect(arranged[j]-boxes[j]*0.5f,boxes[j]))<1,"Clustered magnets do not overlap");
             }
+            var rankPuzzle=new Puzzle{id="rank-test",rankBoxes=true,tieTolerance=0,topics=new[]{new Topic{similarity=1},new Topic{similarity=.8f},new Topic{similarity=.6f},new Topic{similarity=.4f},new Topic{similarity=.2f}}};
+            var rankState=Rules.NewRound(rankPuzzle);
+            Check(Rules.SetRanking(rankState,new[]{0,1,2,3,4}),"Rank placements accepted");
+            Check(Rules.Score(rankPuzzle,rankState).percent==100,"Five correct boxes earn 100");VerifyTopicPoints(rankPuzzle,rankState);
+            Check(Rules.SetRanking(rankState,new[]{1,0,2,3,4})&&Rules.Score(rankPuzzle,rankState).percent==80,"Two adjacent swapped boxes earn 10 each, for 80 total");
+            string beforeInvalid=JsonUtility.ToJson(rankState);
+            Check(!Rules.SetRanking(rankState,new[]{0,0,2,3,4})&&JsonUtility.ToJson(rankState)==beforeInvalid,"Duplicate box is rejected atomically");
+            Check(!Rules.SetRanking(rankState,new[]{0,1,2,3,5})&&!Rules.SetRanking(rankState,new[]{0,1}),"Invalid ranking payloads rejected");
+            Check(Rules.SetRanking(rankState,new[]{4,3,2,1,0})&&Rules.Score(rankPuzzle,rankState).percent==20,"Reverse ordering only scores the middle box");VerifyTopicPoints(rankPuzzle,rankState);
+            Check(Rules.SetRanking(rankState,new[]{1,2,3,4,0})&&Rules.Score(rankPuzzle,rankState).percent==40&&Rules.Score(rankPuzzle,rankState).correct==0,"Four adjacent placements earn 40 without counting as exact");VerifyTopicPoints(rankPuzzle,rankState);
+            rankPuzzle.topics[1].similarity=.99f;rankPuzzle.tieTolerance=.02f;
+            Check(Rules.SetRanking(rankState,new[]{1,0,2,3,4})&&Rules.Score(rankPuzzle,rankState).percent==100,"Near ties accept either box order");
+            Check(Rules.SetRanking(rankState,new[]{-1,0,2,3,4})&&!Rules.Complete(rankState)&&Rules.Score(rankPuzzle,rankState).percent==80,"Tray topics remain incomplete and earn no points");
+            rankState.revealed=true;Check(!Rules.SetRanking(rankState,new[]{0,1,2,3,4}),"Revealed rankings are immutable");
+            Debug.Log("NEARDLE BOX PASS: exact and adjacent placement scoring, swaps, ties, partial rankings, invalid payloads and reveal locking.");
             Debug.Log("NEARER STREAM PASS: "+stream.ArticleCount+" articles, "+stream.AnchorCount+" centers, "+stream.CollectionCount+" collections, "+signatures.Count+" distinct questions from 1000, "+wildcardCount+" supported wildcards, reproducible generation and crowded magnet layout.");
             Debug.Log("NEARER PASS: seven boards, " + pairs + " comparisons, scoring, ties, equal radii, persistence, corrupt saves and UTC dates.");
         }

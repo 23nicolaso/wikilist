@@ -25,6 +25,7 @@ namespace Nearer
         public int anchorLinkCount;
         public float tieTolerance;
         public int informativePairs;
+        public bool rankBoxes;
         public Topic[] topics;
     }
 
@@ -119,6 +120,12 @@ namespace Nearer
         public static ScoreResult Score(Puzzle puzzle, RoundState state)
         {
             var score = new ScoreResult();
+            if(puzzle.rankBoxes)
+            {
+                var points=BoxPoints(puzzle,state);score.total=puzzle.topics.Length;
+                foreach(int award in points){if(award==20)score.correct++;score.percent+=award;}
+                return score;
+            }
             for (int i = 0; i < puzzle.topics.Length; i++)
             for (int j = i + 1; j < puzzle.topics.Length; j++)
             {
@@ -136,6 +143,7 @@ namespace Nearer
         // shares so the visible whole-number awards sum exactly to the existing score.
         public static int[] TopicPoints(Puzzle puzzle, RoundState state)
         {
+            if(puzzle.rankBoxes)return BoxPoints(puzzle,state);
             var result = new int[puzzle.topics.Length];
             var shares = new int[result.Length];
             var score = Score(puzzle, state);
@@ -158,6 +166,33 @@ namespace Nearer
                 awarded = subtotal;
             }
             return result;
+        }
+
+        public static int[] SimilarityOrder(Puzzle puzzle)
+        {
+            var order=new int[puzzle.topics.Length];for(int i=0;i<order.Length;i++)order[i]=i;
+            Array.Sort(order,(a,b)=>{int comparison=puzzle.topics[b].similarity.CompareTo(puzzle.topics[a].similarity);return comparison==0?a.CompareTo(b):comparison;});return order;
+        }
+        public static bool SetRanking(RoundState state,int[] slots)
+        {
+            if(state==null||state.revealed||slots==null||slots.Length!=5)return false;
+            var used=new bool[5];foreach(int slot in slots){if(slot < -1||slot>4)return false;if(slot>=0){if(used[slot])return false;used[slot]=true;}}
+            for(int i=0;i<5;i++){state.placed[i]=slots[i]>=0;state.positions[i]=Vector2.right*Mathf.Lerp(MinimumRadius,MaximumRadius,slots[i]<0?0.5f:(slots[i]+1)/6f);}return true;
+        }
+        static int[] BoxPoints(Puzzle puzzle,RoundState state)
+        {
+            var points=new int[puzzle.topics.Length];var correct=SimilarityOrder(puzzle);
+            for(int i=0;i<points.Length;i++)
+            {
+                if(!state.placed[i])continue;
+                int slot=Mathf.RoundToInt(Mathf.InverseLerp(MinimumRadius,MaximumRadius,state.positions[i].magnitude)*6-1);
+                if(slot<0||slot>=correct.Length)continue;
+                int distance=correct.Length;
+                for(int target=0;target<correct.Length;target++)
+                    if(Mathf.Abs(puzzle.topics[i].similarity-puzzle.topics[correct[target]].similarity)<=puzzle.tieTolerance)distance=Math.Min(distance,Math.Abs(slot-target));
+                points[i]=distance==0?20:distance==1?10:0;
+            }
+            return points;
         }
 
         public static int[] ClockwiseOrder(Vector2[] positions)

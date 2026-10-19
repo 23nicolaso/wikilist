@@ -137,7 +137,7 @@ namespace Nearer
         void OpenQuestion(bool transition)
         {
             StopAllCoroutines();IsRevealing=false;dragging=false;Selected=-1;notice=null;CloseOverlay();
-            Puzzle=stream.Generate(date,question);StorageKey="nearer.v3.round."+date+"."+question;
+            Puzzle=stream.Generate(date,question);Puzzle.rankBoxes=true;StorageKey="neardle.boxes.v1.round."+date+"."+question;
             connectionPaths=new string[5][];for(int i=0;i<5;i++)connectionPaths[i]=stream.ShortestPath(Puzzle.anchorTitle,Puzzle.topics[i].title);
             RoundState saved=null;try{string json=Read(StorageKey);if(!string.IsNullOrEmpty(json))saved=JsonUtility.FromJson<RoundState>(json);}catch{}
             State=Rules.Valid(saved,Puzzle)?saved:Rules.NewRound(Puzzle);
@@ -235,9 +235,10 @@ namespace Nearer
         public void Reveal()
         {
             if(State.revealed||IsRevealing)return;
+            if(browserUI&&!Rules.Complete(State)){notice="Fill all five boxes before revealing.";UpdateUI();return;}
             if(dragging){dragging=false;nodes[Selected].RemoveFromClassList("dragging");nodes[Selected].ReleasePointer(dragPointer);}
             topicPoints=Rules.TopicPoints(Puzzle,State);awardsShown=0;revealedPoints=0;correcting=false;
-            revealOrder=(int[])laneOrder.Clone();Array.Clear(awarded,0,awarded.Length);
+            revealOrder=(int[])laneOrder.Clone();Array.Sort(revealOrder,(a,b)=>State.positions[a].magnitude.CompareTo(State.positions[b].magnitude));Array.Clear(awarded,0,awarded.Length);
             State.revealed=true;Selected=-1;Save();IsRevealing=true;UpdateUI();StartCoroutine(FinishReveal());
         }
         IEnumerator FinishReveal()
@@ -365,6 +366,7 @@ namespace Nearer
             {
                 case "sync":UpdateUI();break;
                 case "move":if(command.index>=0&&command.index<5&&!float.IsNaN(command.distance)&&!float.IsInfinity(command.distance))PlaceNormalized(command.index,Vector2.right*Mathf.Lerp(Rules.MinimumRadius,Rules.MaximumRadius,Mathf.Clamp01(command.distance)));break;
+                case "rank":if(!IsRevealing&&Rules.SetRanking(State,command.slots)){notice=null;layoutDirty=true;Save();UpdateUI();}break;
                 case "select":if(command.index>=0&&command.index<5){Selected=command.index;UpdateUI();}break;
                 case "reveal":Reveal();break;
                 case "next":if(State.revealed)Next();break;
@@ -380,14 +382,14 @@ namespace Nearer
             for(int i=0;i<5;i++)
             {
                 var path=connectionPaths[i];var urls=new string[path.Length];for(int step=0;step<path.Length;step++)urls[step]=stream.ArticleUrl(path[step]);
-                topics[i]=new BrowserTopic{title=Puzzle.topics[i].title,label=Puzzle.topics[i].label,url=Puzzle.topics[i].url,distance=Mathf.InverseLerp(Rules.MinimumRadius,Rules.MaximumRadius,State.positions[i].magnitude),reference=Mathf.InverseLerp(Rules.MinimumRadius,Rules.MaximumRadius,Rules.ReferenceRadius(Puzzle,i)),points=topicPoints[i],awarded=awarded[i],sharedCount=Puzzle.topics[i].sharedCount,evidence=Puzzle.topics[i].evidence,path=path,pathUrls=urls};
+                topics[i]=new BrowserTopic{title=Puzzle.topics[i].title,label=Puzzle.topics[i].label,url=Puzzle.topics[i].url,slot=State.placed[i]?Mathf.Clamp(Mathf.RoundToInt(Mathf.InverseLerp(Rules.MinimumRadius,Rules.MaximumRadius,State.positions[i].magnitude)*6-1),0,4):-1,distance=Mathf.InverseLerp(Rules.MinimumRadius,Rules.MaximumRadius,State.positions[i].magnitude),reference=Mathf.InverseLerp(Rules.MinimumRadius,Rules.MaximumRadius,Rules.ReferenceRadius(Puzzle,i)),points=topicPoints[i],awarded=awarded[i],sharedCount=Puzzle.topics[i].sharedCount,evidence=Puzzle.topics[i].evidence,path=path,pathUrls=urls};
             }
-            NearerPublishState(JsonUtility.ToJson(new BrowserState{puzzleId=Puzzle.id,anchor=Puzzle.anchor,anchorTitle=Puzzle.anchorTitle,anchorUrl=Puzzle.anchorUrl,question=question,selected=Selected,score=IsRevealing?revealedPoints:result.percent,correct=result.correct,total=result.total,revealed=State.revealed,animating=IsRevealing,correcting=correcting,images=images,reducedMotion=ReducedMotion,topics=topics,order=State.revealed?revealOrder:laneOrder,notice=notice}));
+            NearerPublishState(JsonUtility.ToJson(new BrowserState{puzzleId="boxes-"+Puzzle.id,anchor=Puzzle.anchor,anchorTitle=Puzzle.anchorTitle,anchorUrl=Puzzle.anchorUrl,question=question,selected=Selected,score=IsRevealing?revealedPoints:result.percent,correct=result.correct,total=result.total,revealed=State.revealed,animating=IsRevealing,correcting=correcting,images=images,reducedMotion=ReducedMotion,topics=topics,order=laneOrder,correctOrder=Rules.SimilarityOrder(Puzzle),notice=notice}));
 #endif
         }
-        [Serializable]class BrowserCommand{public string action,value;public int index;public float distance;}
-        [Serializable]class BrowserState{public string puzzleId,anchor,anchorTitle,anchorUrl,notice;public int question,selected,score,correct,total;public int[] order;public bool revealed,animating,correcting,images,reducedMotion;public BrowserTopic[] topics;}
-        [Serializable]class BrowserTopic{public string title,label,url;public float distance,reference;public int points,sharedCount;public bool awarded;public string[] path,pathUrls,evidence;}
+        [Serializable]class BrowserCommand{public string action,value;public int index;public int[] slots;public float distance;}
+        [Serializable]class BrowserState{public string puzzleId,anchor,anchorTitle,anchorUrl,notice;public int question,selected,score,correct,total;public int[] order,correctOrder;public bool revealed,animating,correcting,images,reducedMotion;public BrowserTopic[] topics;}
+        [Serializable]class BrowserTopic{public string title,label,url;public float distance,reference;public int slot,points,sharedCount;public bool awarded;public string[] path,pathUrls,evidence;}
         public string Snapshot()
         {
             var s=Rules.Score(Puzzle,State);int overlaps=0;for(int i=0;i<5;i++)for(int j=i+1;j<5;j++)if(MagnetLayout.Overlap(new Rect(targets[i]-nodeSizes[i]*0.5f,nodeSizes[i]),new Rect(targets[j]-nodeSizes[j]*0.5f,nodeSizes[j]))>1)overlaps++;
