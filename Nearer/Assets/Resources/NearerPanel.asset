@@ -32,8 +32,10 @@ MonoBehaviour:
   m_BindingLogLevel: 0
   m_ClearDepthStencil: 1
   m_ClearColor: 1
-  m_ColorClearValue: {r: 0.8980392, g: 0.93333334, b: 0.94509804, a: 1}
+  m_ColorClearValue: {r: 0.930361, g: 0.9098039, b: 0.93535644, a: 1}
   m_VertexBudget: 0
+  m_ExtraVertexChannels: 0
+  m_TextureSlotCount: 1
   m_DynamicAtlasSettings:
     m_MinAtlasSize: 64
     m_MaxAtlasSize: 4096
@@ -41,9 +43,12 @@ MonoBehaviour:
     m_ActiveFilters: 31
   m_AtlasBlitShader: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
   m_DefaultShader: {fileID: 9100, guid: 0000000000000000f000000000000000, type: 0}
+  m_RuntimeGaussianBlurShader: {fileID: 20300, guid: 0000000000000000f000000000000000, type: 0}
+  m_RuntimeColorEffectShader: {fileID: 20301, guid: 0000000000000000f000000000000000, type: 0}
+  m_RuntimeDropShadowComposite: {fileID: 20302, guid: 0000000000000000f000000000000000, type: 0}
   m_SDFShader: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
   m_BitmapShader: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
   m_SpriteShader: {fileID: 19012, guid: 0000000000000000f000000000000000, type: 0}
-  m_ICUDataAsset: {fileID: 0}
+  m_ICUDataAsset: {fileID: 20204, guid: 0000000000000000f000000000000000, type: 0}
   forceGammaRendering: 0
   textSettings: {fileID: 11400000, guid: 0ebc910d9da7f8c4480b6c99ae387b50, type: 2}

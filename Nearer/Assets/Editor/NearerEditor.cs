@@ -18,6 +18,7 @@ namespace Nearer.Editor
         const string ScenePath = "Assets/Scenes/Nearer.unity";
         static readonly string Inbox = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "..", ".nearer-local", "editor"));
         static double nextPoll;
+        static bool buildQueued;
 
         static NearerEditor()
         {
@@ -83,6 +84,7 @@ namespace Nearer.Editor
                 panel.textSettings=text;
             }
             panel.scaleMode=PanelScaleMode.ConstantPixelSize;panel.scale=1;
+            panel.textureSlotCount=TextureSlotCount.One;
             EditorUtility.SetDirty(panel);
         }
 
@@ -115,11 +117,14 @@ namespace Nearer.Editor
                 var correct = Rules.Score(puzzle, state);
                 pairs += correct.total;
                 Check(correct.percent == 100, "Correct order scores 100");
+                VerifyTopicPoints(puzzle,state);
                 Check(correct.total == puzzle.informativePairs && correct.total >= 6, "Informative pair count");
                 for (int i = 0; i < 5; i++) state.positions[i] = Vector2.right * (1.12f - Rules.ReferenceRadius(puzzle, i));
                 Check(Rules.Score(puzzle, state).percent == 0, "Reverse order scores zero");
+                VerifyTopicPoints(puzzle,state);
                 for (int i = 0; i < 5; i++) state.positions[i] = Vector2.right * 0.5f;
                 Check(Rules.Score(puzzle, state).percent == 0, "Equal radii cannot bypass scoring");
+                VerifyTopicPoints(puzzle,state);
                 state.revealed = true;
                 var roundTrip = JsonUtility.FromJson<RoundState>(JsonUtility.ToJson(state));
                 Check(Rules.Valid(roundTrip, puzzle) && roundTrip.revealed, "Completed progress roundtrip");
@@ -130,6 +135,24 @@ namespace Nearer.Editor
             var tiePuzzle = new Puzzle {id = "ties", tieTolerance = 0.01f, topics = new[] {new Topic {similarity = 0.2f}, new Topic {similarity = 0.205f}, new Topic {similarity = 0.1f}}};
             var tieState = new RoundState {positions = new[] {Vector2.right * 0.3f, Vector2.right * 0.2f, Vector2.right * 0.8f}, placed = new[] {true, true, true}};
             Check(Rules.Score(tiePuzzle, tieState).percent == 100 && Rules.Score(tiePuzzle, tieState).total == 2, "Near ties accept either order");
+            VerifyTopicPoints(tiePuzzle,tieState);
+            var allTied=new Puzzle{tieTolerance=0.01f,topics=new[]{new Topic{similarity=0.2f},new Topic{similarity=0.2f},new Topic{similarity=0.2f}}};
+            VerifyTopicPoints(allTied,tieState);
+            var clockwise=Rules.ClockwiseOrder(new[]{Vector2.left,Vector2.up,Vector2.down,Vector2.right,new Vector2(1,-1)});
+            Check(string.Join(",",clockwise)=="2,4,3,1,0","Awards run clockwise from twelve o'clock in screen coordinates");
+            var sameAngle=Rules.ClockwiseOrder(new[]{Vector2.down,Vector2.down*0.5f,Vector2.right});
+            Check(string.Join(",",sameAngle)=="0,1,2","Clockwise ties are deterministic");
+            var pathFixture=new SourceCatalog{articles=new[]{
+                new SourceArticle{title="A",links=new[]{"C","B"}},
+                new SourceArticle{title="B",links=new[]{"D","A"}},
+                new SourceArticle{title="C",links=new[]{"E"}},
+                new SourceArticle{title="E",links=new[]{"D"}},
+                new SourceArticle{title="D",links=Array.Empty<string>()},
+                new SourceArticle{title="Isolated",links=new[]{"D"}}}};
+            Check(string.Join(",",QuestionStream.FindShortestPath(pathFixture,"A","D"))=="A,B,D","BFS returns the shortest directed route, not the first depth-first route");
+            Check(QuestionStream.FindShortestPath(pathFixture,"D","A").Length==0,"Paths never follow links backwards");
+            Check(QuestionStream.FindShortestPath(pathFixture,"A","Isolated").Length==0,"Unreachable pages cannot be connected through a shared outgoing link");
+            Check(QuestionStream.FindShortestPath(pathFixture,"A","A").Length==1,"Identity route has zero links");
             Check(Rules.DayIndex(new DateTime(2026, 10, 18, 23, 59, 59), bank.epoch, 7) == 0, "UTC day start");
             Check(Rules.DayIndex(new DateTime(2026, 10, 19), bank.epoch, 7) == 1, "UTC next day");
             Check(Rules.DayIndex(new DateTime(2026, 10, 25), bank.epoch, 7) == 0, "Seven-day cycle");
@@ -159,6 +182,17 @@ namespace Nearer.Editor
                 var generatedState=Rules.NewRound(generated);
                 for(int j=0;j<5;j++){generatedState.positions[j]=Vector2.right*Rules.ReferenceRadius(generated,j);generatedState.placed[j]=true;}
                 Check(Rules.Score(generated,generatedState).percent==100,"Generated reference score");
+                if(i<12)foreach(var topic in generated.topics)
+                {
+                    var path=stream.ShortestPath(generated.anchorTitle,topic.title);
+                    if(path.Length==0)continue;
+                    Check(path[0]==generated.anchorTitle&&path[path.Length-1]==topic.title,"Paths connect the requested articles");
+                    for(int step=1;step<path.Length;step++)Check(stream.HasLink(path[step-1],path[step]),"Every path step is a directed Wikipedia link");
+                }
+                VerifyTopicPoints(generated,generatedState);
+                // Mixed orders exercise fractional point rounding, beyond perfect/zero scores.
+                for(int j=0;j<5;j++)generatedState.positions[j]=Vector2.right*Mathf.Lerp(0.2f,0.95f,((i*7+j*3)%11)/10f);
+                VerifyTopicPoints(generated,generatedState);
                 Check(stream.Generate("2026-10-18",i).id==generated.id,"Reproducible generated question");
             }
             Check(signatures.Count>=900,"Procedural question variety");
@@ -173,6 +207,14 @@ namespace Nearer.Editor
             }
             Debug.Log("NEARER STREAM PASS: "+stream.ArticleCount+" articles, "+stream.AnchorCount+" centers, "+stream.CollectionCount+" collections, "+signatures.Count+" distinct questions from 1000, "+wildcardCount+" supported wildcards, reproducible generation and crowded magnet layout.");
             Debug.Log("NEARER PASS: seven boards, " + pairs + " comparisons, scoring, ties, equal radii, persistence, corrupt saves and UTC dates.");
+        }
+
+        static void VerifyTopicPoints(Puzzle puzzle,RoundState state)
+        {
+            int total=0;var awards=Rules.TopicPoints(puzzle,state);
+            Check(awards.Length==puzzle.topics.Length,"One award per topic");
+            foreach(int award in awards){Check(award>=0,"Topic awards cannot be negative");total+=award;}
+            Check(total==Rules.Score(puzzle,state).percent,"Topic awards add up to the round score");
         }
 
         static void Check(bool value, string message)
@@ -208,7 +250,13 @@ namespace Nearer.Editor
         }
 
         [MenuItem("Nearer/Build browser game")]
-        public static void BuildWeb()=>BuildWeb(true);
+        public static void BuildWeb()
+        {
+            // MCP can dispatch menu actions from Unity's synchronization context.
+            // BuildPipeline must run on a subsequent editor tick, outside that loop.
+            buildQueued=true;
+            Debug.Log("Nearer browser build queued.");
+        }
 
         static void BuildWeb(bool verifyData)
         {
@@ -224,13 +272,39 @@ namespace Nearer.Editor
             };
             var report = BuildPipeline.BuildPlayer(options);
             if (report.summary.result != BuildResult.Succeeded) throw new Exception("Nearer browser build failed: " + report.summary.result);
+            ExportBrowserMedia();
             Debug.Log("NEARER BUILD PASS: " + report.summary.totalSize + " bytes.");
+        }
+
+        static void ExportBrowserMedia()
+        {
+            var media=JsonUtility.FromJson<MediaBank>(Resources.Load<TextAsset>("nearer-media").text);
+            Directory.CreateDirectory("Builds/Web/Images");
+            foreach(var credit in media.entries)
+            {
+                string stem=Path.GetFileName(credit.resource);
+                foreach(string file in Directory.GetFiles("Assets/Resources/Images",stem+".*"))
+                {
+                    if(file.EndsWith(".meta",StringComparison.OrdinalIgnoreCase))continue;
+                    credit.browserImage="Images/"+Path.GetFileName(file);
+                    File.Copy(file,Path.Combine("Builds/Web",credit.browserImage),true);break;
+                }
+                if(string.IsNullOrEmpty(credit.browserImage))throw new Exception("Missing browser portrait: "+credit.title);
+            }
+            File.WriteAllText("Builds/Web/media.json",JsonUtility.ToJson(media));
         }
 
         static void Poll()
         {
             if (EditorApplication.timeSinceStartup < nextPoll || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
             nextPoll = EditorApplication.timeSinceStartup + 0.25;
+            if(buildQueued)
+            {
+                buildQueued=false;
+                if(EditorApplication.isPlayingOrWillChangePlaymode){Debug.LogError("Stop Play Mode before building Nearer.");return;}
+                BuildWeb(true);
+                return;
+            }
             string path = Path.Combine(Inbox, "command.json");
             if (!File.Exists(path)) return;
             string result;

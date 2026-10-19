@@ -10,7 +10,8 @@
     "nearer": "node scripts/serve-nearer.mjs",
     "data:nearer": "node scripts/generate-nearer-culture.mjs",
     "media:nearer": "node scripts/fetch-nearer-media.mjs",
-    "check:nearer": "node scripts/check-nearer.mjs"
+    "check:nearer": "node scripts/check-nearer.mjs",
+    "check:nearer:ui": "node scripts/check-nearer-ui.mjs"
   },
   "devDependencies": {
     "linkedom": "^0.18.13"

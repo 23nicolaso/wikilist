@@ -132,6 +132,48 @@ namespace Nearer
             return score;
         }
 
+        // Each correct comparison belongs equally to its two topics. Round cumulative
+        // shares so the visible whole-number awards sum exactly to the existing score.
+        public static int[] TopicPoints(Puzzle puzzle, RoundState state)
+        {
+            var result = new int[puzzle.topics.Length];
+            var shares = new int[result.Length];
+            var score = Score(puzzle, state);
+            for (int i = 0; i < result.Length; i++)
+            for (int j = i + 1; j < result.Length; j++)
+            {
+                float truth = puzzle.topics[i].similarity - puzzle.topics[j].similarity;
+                float prediction = state.positions[j].magnitude - state.positions[i].magnitude;
+                if (Mathf.Abs(truth) <= puzzle.tieTolerance || Mathf.Abs(prediction) <= 0.012f || Mathf.Sign(prediction) != Mathf.Sign(truth)) continue;
+                shares[i]++; shares[j]++;
+            }
+            int cumulative = 0, awarded = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                cumulative += shares[i];
+                int subtotal = score.total == 0
+                    ? Mathf.RoundToInt(100f * (i + 1) / result.Length)
+                    : Mathf.RoundToInt(50f * cumulative / score.total);
+                result[i] = subtotal - awarded;
+                awarded = subtotal;
+            }
+            return result;
+        }
+
+        public static int[] ClockwiseOrder(Vector2[] positions)
+        {
+            var order=new int[positions.Length];
+            for(int i=0;i<order.Length;i++)order[i]=i;
+            Array.Sort(order,(a,b)=>
+            {
+                // UI coordinates point down: twelve o'clock is zero, right is 90.
+                float aa=Mathf.Repeat(Mathf.Atan2(positions[a].x,-positions[a].y)*Mathf.Rad2Deg,360);
+                float bb=Mathf.Repeat(Mathf.Atan2(positions[b].x,-positions[b].y)*Mathf.Rad2Deg,360);
+                int comparison=aa.CompareTo(bb);return comparison==0?a.CompareTo(b):comparison;
+            });
+            return order;
+        }
+
         public static float ReferenceRadius(Puzzle puzzle, int index)
         {
             float rankSum = 0;

@@ -1,4 +1,7 @@
 mergeInto(LibraryManager.library, {
+  NearerPublishState: function(value) {
+    if (window.nearerView) window.nearerView.receive(JSON.parse(UTF8ToString(value)));
+  },
   NearerPixelRatio: function() {
     return window.nearerPixelRatio || 1;
   },

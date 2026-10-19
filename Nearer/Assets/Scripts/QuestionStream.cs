@@ -7,7 +7,7 @@ namespace Nearer
     [Serializable] public class SourceCatalog {public int schema; public string version; public SourceArticle[] articles;}
     [Serializable] public class SourceArticle {public string title, label, url; public long revision; public string[] links, collections;}
     [Serializable] public class MediaBank {public MediaCredit[] entries;}
-    [Serializable] public class MediaCredit {public string title, resource, author, license, licenseUrl, url, file;}
+    [Serializable] public class MediaCredit {public string title, resource, author, license, licenseUrl, url, file, browserImage;}
 
     public sealed class QuestionStream
     {
@@ -19,6 +19,8 @@ namespace Nearer
         readonly List<List<int>> anchorGroups = new List<List<int>>();
         readonly List<string> groupNames = new List<string>();
         readonly HashSet<string> familiar;
+        readonly Dictionary<string,int> articleIndex=new Dictionary<string,int>(StringComparer.Ordinal);
+        readonly Dictionary<string,string[]> paths=new Dictionary<string,string[]>(StringComparer.Ordinal);
         static readonly HashSet<string> Generic = new HashSet<string> {"United States", "United Kingdom", "France", "Germany", "Europe", "China", "India", "Italy", "Spain", "Japan", "Canada", "Australia", "Brazil", "US$", "World War II", "World War I", "English language", "Latin", "The New York Times", "The Guardian", "BBC News"};
 
         public QuestionStream(SourceCatalog source)
@@ -28,7 +30,7 @@ namespace Nearer
             links = new HashSet<string>[n];
             related = new List<int>[n]; surprises = new List<int>[n];
             overlap = new float[n,n]; familiar = new HashSet<string>();
-            for (int i=0;i<n;i++) {links[i] = new HashSet<string>(source.articles[i].links);familiar.Add(source.articles[i].title);}
+            for (int i=0;i<n;i++) {links[i] = new HashSet<string>(source.articles[i].links);familiar.Add(source.articles[i].title);articleIndex[source.articles[i].title]=i;}
             for (int i=0;i<n;i++)
             {
                 related[i] = new List<int>(); surprises[i] = new List<int>();
@@ -68,6 +70,44 @@ namespace Nearer
         public int AnchorCount => anchors.Count;
         public int ArticleCount => catalog.articles.Length;
         public int CollectionCount => anchorGroups.Count;
+
+        public string[] ShortestPath(string from,string to)
+        {
+            string key=from+"\n"+to;
+            if(paths.TryGetValue(key,out var cached))return cached;
+            var result=FindShortestPath(catalog,from,to);
+            paths[key]=result;return result;
+        }
+
+        // Breadth-first search follows outgoing links only. Missing article bodies
+        // cannot be expanded, so a result is shortest within the frozen collection.
+        public static string[] FindShortestPath(SourceCatalog source,string from,string to)
+        {
+            var articles=new Dictionary<string,SourceArticle>(StringComparer.Ordinal);
+            foreach(var article in source.articles)articles[article.title]=article;
+            var previous=new Dictionary<string,string>(StringComparer.Ordinal){{from,null}};
+            var queue=new Queue<string>();queue.Enqueue(from);
+            while(queue.Count>0)
+            {
+                string title=queue.Dequeue();
+                if(title==to)
+                {
+                    var route=new List<string>();
+                    for(string node=to;node!=null;node=previous[node])route.Add(node);
+                    route.Reverse();return route.ToArray();
+                }
+                if(!articles.TryGetValue(title,out var article))continue;
+                foreach(string target in article.links)
+                {
+                    if(previous.ContainsKey(target)||target!=to&&!articles.ContainsKey(target))continue;
+                    previous[target]=title;queue.Enqueue(target);
+                }
+            }
+            return Array.Empty<string>();
+        }
+
+        public bool HasLink(string from,string to)=>articleIndex.TryGetValue(from,out int index)&&links[index].Contains(to);
+        public string ArticleUrl(string title)=>articleIndex.TryGetValue(title,out int index)?catalog.articles[index].url:"https://en.wikipedia.org/wiki/"+Uri.EscapeDataString(title.Replace(' ','_'));
 
         public Puzzle Generate(string day, int number)
         {

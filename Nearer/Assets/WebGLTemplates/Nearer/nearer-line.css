@@ -1,0 +1,86 @@
+/* Large readable controls, five rulers, and no page scrolling. */
+html,body{height:100%;overflow:hidden}
+#nearer-app{height:100dvh;max-width:none;display:flex;flex-direction:column;padding:0 16px;--photo-size:clamp(44px,7dvh,78px);--name-width:0px;--axis-inset:44px;--muted:#43545f;--ink:#202e38}
+.site-header{padding:6px 0;flex-shrink:0}.wordmark{font-size:32px}nav{gap:20px}nav button{font-size:16px;padding:5px 0}
+main{display:flex;flex-direction:column;min-height:0;flex:1;padding:0}
+.edition{font-size:12px;letter-spacing:1px}.question-heading{display:flex;align-items:center;gap:12px;margin:2px 0}
+.question-heading .portrait{height:44px;width:44px;flex-shrink:0}h1{font-size:32px;margin:0;line-height:1.15}
+.intro-copy{font-size:16px;line-height:1.3;margin:3px 0}#result-score{min-height:25px;font-size:17px;margin:2px 0}
+.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px;min-height:0;flex:1;align-items:stretch}
+.distance-field{display:flex;flex-direction:column;align-items:stretch;width:100%;min-width:0;min-height:0;padding:0}
+.distance-map{display:flex;flex-direction:column;align-self:stretch;width:100%;flex:1;min-height:0;overflow:visible;padding:0 0 24px}
+.axis-labels{padding:0 var(--axis-inset) 0 calc(var(--name-width) + var(--axis-inset));margin:0;font-size:12px;letter-spacing:0;min-width:0}
+.lanes{width:100%;display:grid;grid-template-rows:repeat(5,minmax(0,1fr));flex:1;position:relative;min-height:0;min-width:0}.lanes:before{display:none}
+.topic-slot{position:relative;min-height:0}.person-axis{position:relative;top:23px;height:calc(100% - 23px);margin:0 var(--axis-inset) 0 calc(var(--name-width) + var(--axis-inset))}
+.number-line{position:absolute;left:0;right:0;top:50%;height:2px;background:#637480;opacity:.75}
+.axis-tick{position:absolute;top:50%;width:1px;height:6px;background:#637480;opacity:.65}.major-tick{width:2px;height:11px;opacity:1}
+.tick-label{position:absolute;top:calc(100% + 2px);transform:translateX(-50%);font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--paper);padding:0 2px}
+.topic{position:absolute;top:50%;width:var(--photo-size);height:var(--photo-size);transform:translate(-50%,-50%);pointer-events:auto;touch-action:none;cursor:grab;outline-offset:5px}
+.topic:active{cursor:grabbing}.topic:focus-visible{outline:3px solid var(--accent);border-radius:50%}
+.topic .portrait{width:100%;height:100%;border:2px solid var(--accent)}
+.topic-label{position:absolute;left:var(--axis-inset);top:0;transform:none;width:calc(100% - 2*var(--axis-inset));max-height:none;font-size:18px;line-height:1.2;font-weight:600;text-align:left;margin:0;padding:0 10px 0 0;overflow-wrap:anywhere}
+.point-award{top:-26px;left:50%;transform:translateX(-50%);font-size:15px;padding:3px 8px;z-index:5;border:1px solid #397754;color:#205135;background:#f0f8f1}
+.target-circle{position:absolute;top:calc(50% - var(--photo-size)/2 - 5px);width:calc(var(--photo-size) + 10px);height:calc(var(--photo-size) + 10px);transform:translateX(-50%);border:3px solid #287448;border-radius:50%;background:transparent;pointer-events:none;z-index:1}
+.correction-connectors{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+.correction-connectors .correction-line{position:static;fill:none;stroke:#287448;stroke-width:3;stroke-dasharray:3 6;stroke-linecap:round;background:none}
+.correcting .topic,.motion-reduced .topic{transition:none}
+.images-off .topic-marker{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;margin:0}
+.paths-panel{display:flex;flex-direction:column;height:100%;min-height:0;margin:0;max-height:none;padding-left:16px;overflow:hidden}
+.paths-panel h2{font-size:23px;margin:0 0 3px}.path-intro{font-size:14px;line-height:1.3;margin:0 0 5px}
+#path-rows{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));flex:1;min-height:0}
+.path-row{min-height:0;overflow:hidden;margin:0;padding:4px 0}.path-name{display:block;max-width:100%;font-size:16px;line-height:1.2;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.path-count{font-size:15px;margin:3px 0;line-height:1.2}.shared-examples{font-size:14px;line-height:1.3;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shared-examples a{text-decoration:none}.shared-examples a:hover{text-decoration:underline}.path-chain{font-size:14px;line-height:1.5}
+.round-controls{flex-shrink:0;margin:4px 0;gap:20px}.primary{padding:10px 26px;min-width:132px;font-size:17px}.round-controls button{font-size:16px}
+.round-status{font-size:14px;line-height:1.3;min-height:36px;margin:0}#paths-button{text-decoration:underline;text-underline-offset:3px}
+footer{flex-shrink:0;padding:6px 0;font-size:12px;line-height:1.3}footer button{font-size:13px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#dialog-body .path-row{overflow:visible;padding:8px 0}#dialog-body .shared-examples{white-space:normal}
+dialog{font-size:16px}dialog p{font-size:16px}.close-dialog{font-size:15px;min-height:36px;padding:4px 6px}
+/* Results always pair colors with labels and numeric values. */
+#results{width:480px;max-height:94dvh;padding:18px;border-radius:20px;box-shadow:0 18px 70px #20313a33}
+#close-results{position:absolute;right:10px;top:6px}.results-heading{text-align:center;padding-top:14px}.results-eyebrow{font-size:12px;letter-spacing:1px;margin:0}.results-heading h2{font-size:29px;margin:4px 0 8px}.score-caption{text-align:center;font-size:16px;margin:0 0 5px}
+.score-ring{width:126px;height:126px;margin:0 auto 12px;border-radius:50%;background:conic-gradient(var(--accent) var(--score,0%),var(--line) 0);padding:10px}
+.score-ring>div{height:100%;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-direction:column}.score-ring strong{font-size:51px;line-height:1.1}.score-ring span{font-size:15px}
+.score-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center}.score-metrics>div{padding:10px;background:#ffffff66;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column}.score-metrics strong{font-size:32px;line-height:1.2}.score-metrics span{font-size:15px}
+.rounds-played{text-align:center;margin:9px 0;font-size:16px}.score-history h3{font-size:16px;margin:8px 0}.score-bars{display:flex;gap:10px;height:100px;align-items:stretch}.score-column{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px}.bar-value,.bar-label{font-size:13px;font-variant-numeric:tabular-nums}.bar-track{flex:1;width:100%;max-width:35px;display:flex;align-items:flex-end;background:#ffffff66;border-radius:4px}.score-bar{width:100%;min-height:2px;background:var(--accent);border-radius:4px}.bar-label{color:var(--muted)}
+.stats-storage{font-size:13px;text-align:center;margin:10px 0}.results-actions{display:flex;justify-content:center;gap:20px;align-items:center}.results-actions>button{font-size:16px}.stats-empty{font-size:16px;text-align:center;width:100%}
+@media(max-width:1100px){.game-layout{grid-template-columns:minmax(0,1fr)}.paths-panel{display:none}#nearer-app{--name-width:0px;--axis-inset:44px}}
+@media(max-width:600px){
+#nearer-app{padding:0 12px;--photo-size:clamp(40px,6dvh,56px);--name-width:0px;--axis-inset:32px}
+.site-header{padding:5px 0}.wordmark{font-size:26px}nav{gap:12px}nav button{font-size:14px}h1{font-size:25px}.edition{display:none}.question-heading{gap:8px}.question-heading .portrait{width:34px;height:34px}
+.intro-copy{font-size:14px}#result-score{font-size:15px;min-height:40px;margin:0}.topic-label{font-size:15px;padding-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.axis-labels{font-size:11px;padding-right:0;white-space:normal}.point-award{font-size:13px;padding:2px 5px;left:50%;top:-23px;transform:translateX(-50%)}
+.tick-label{font-size:12px}.round-controls{gap:14px}.round-controls button{font-size:15px}.round-status{font-size:13px;min-height:48px}footer{font-size:11px}footer span{display:none}footer button{font-size:12px}
+#results{padding:14px}.results-heading h2{font-size:25px;margin-bottom:10px}.score-ring{width:126px;height:126px;margin-bottom:10px}.score-ring strong{font-size:43px}.score-metrics strong{font-size:29px}.results-actions{gap:12px}
+}
+@media(max-height:650px){
+#nearer-app{--photo-size:40px}.edition{display:none}.question-heading .portrait{width:30px;height:30px}h1{font-size:24px}.intro-copy{font-size:14px}.site-header{padding:3px 0}.round-status{min-height:30px;font-size:13px}footer{padding:3px 0}.topic-label{font-size:15px}
+#results{padding:12px}.results-heading h2{margin:0 0 6px;font-size:24px}.score-ring{width:100px;height:100px;margin-bottom:8px;padding:7px}.score-ring strong{font-size:35px}.score-ring span{font-size:13px}.score-metrics>div{padding:6px}.score-metrics strong{font-size:26px}.score-bars{height:70px}.rounds-played,.stats-storage{margin:5px 0}
+}
+
+@media(max-height:500px){html,body{height:auto;overflow:auto}#nearer-app{height:auto;min-height:100dvh}main{min-height:520px}}
+
+.results-overview{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center}.score-metrics{grid-template-columns:1fr;gap:8px}.score-metrics>div{padding:6px}.score-metrics strong{font-size:29px}.score-bars{height:80px}
+@media(max-width:600px){.results-overview{grid-template-columns:126px minmax(0,1fr);gap:12px}.score-metrics span{font-size:14px}.score-ring{width:112px;height:112px}.score-ring strong{font-size:39px}.score-metrics strong{font-size:27px}}
+@media(max-height:650px){.results-overview{grid-template-columns:115px minmax(0,1fr)}.score-ring{width:94px;height:94px}.score-bars{height:64px}.score-caption{margin-bottom:2px}.score-metrics strong{font-size:25px}.score-metrics>div{padding:4px}}
+
+/* A quieter, bounded play area balances the rulers with the surrounding space. */
+body{background:#f3f5f2}
+#nearer-app{max-width:1440px;padding:0 28px;--photo-size:56px;--axis-inset:38px;--ink:#29373c;--muted:#52636a}
+.site-header{padding:12px 0 9px}.wordmark{font-size:28px;letter-spacing:-1px}nav button{font-size:15px}
+.edition{font-size:12px;letter-spacing:.7px;margin-top:3px}.question-heading{margin:5px 0}.question-heading .portrait{width:38px;height:38px}h1{font-size:30px;font-weight:500}
+.intro-copy{color:var(--muted);margin:2px 0 5px}#result-score{font-size:16px}
+.game-layout{max-height:580px;grid-template-columns:minmax(0,1fr) 250px;gap:22px;margin:4px 0 8px}
+.distance-field{background:#ffffff70;border:1px solid #52636a16;border-radius:18px;padding:12px 4px 8px}
+.axis-labels{font-size:13px;text-transform:none;letter-spacing:0}.topic-label{font-size:17px;font-weight:500}
+.number-line{height:1px;background:#6d7d82;opacity:.55}.axis-tick{height:4px;opacity:.35}.major-tick{height:8px;width:1px;opacity:.75}
+.tick-label{font-size:14px;background:transparent;color:var(--muted)}
+.topic .portrait{border-width:1px;box-shadow:0 2px 7px #263e4918;background:#f6f7f3}
+.target-circle{border-width:2px}.correction-connectors .correction-line{stroke-width:2}
+.point-award{font-size:14px;padding:2px 8px;top:-24px}.round-controls{margin:5px 0 7px}.primary{border-radius:12px;font-size:16px;padding:10px 28px;box-shadow:0 2px 4px #263e4910}
+.round-status{max-width:720px;align-self:center;min-height:35px;font-size:14px;color:var(--muted)}
+.paths-panel{border-left:0;padding:10px 0}.paths-panel h2{font-size:21px}.path-row{border-bottom-color:#52636a20}.path-name{font-size:16px;font-weight:500}.shared-examples{font-size:14px}
+footer{border-top-color:#52636a20;padding:9px 0;font-size:12px}
+@media(max-width:1100px){.game-layout{grid-template-columns:minmax(0,1fr)}.paths-panel{display:none}}
+@media(max-width:600px){#nearer-app{padding:0 12px;--photo-size:44px;--axis-inset:27px}.site-header{padding:7px 0}.wordmark{font-size:25px}nav{gap:12px}nav button{font-size:14px}h1{font-size:24px}.question-heading .portrait{width:32px;height:32px}.intro-copy{font-size:14px}.distance-field{padding:8px 0 5px;border-radius:14px}.topic-label{font-size:15px}.axis-labels{font-size:12px}.tick-label{font-size:12px}.point-award{font-size:13px}.round-status{font-size:13px}.game-layout{margin:2px 0 4px}.round-controls{gap:13px}footer{padding:6px 0}}
+@media(max-height:750px){#nearer-app{--photo-size:44px}.site-header{padding:5px 0}.question-heading{margin:2px 0}.game-layout{margin:0 0 4px}.distance-field{padding-top:8px}.round-status{min-height:30px}footer{padding:5px 0}}
