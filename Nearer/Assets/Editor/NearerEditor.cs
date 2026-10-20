@@ -131,6 +131,14 @@ namespace Nearer.Editor
                 roundTrip.positions[0].x = float.NaN;
                 Check(!Rules.Valid(roundTrip, puzzle), "Reject corrupt coordinates");
             }
+            var untouchedPuzzle=new Puzzle{id="untouched-test",tieTolerance=0,topics=new[]{new Topic{similarity=1},new Topic{similarity=.8f},new Topic{similarity=.6f},new Topic{similarity=.4f},new Topic{similarity=.2f}}};
+            var untouched=Rules.NewRound(untouchedPuzzle);
+            for(int i=0;i<4;i++){untouched.positions[i]=untouched.positions[i].normalized*(.3f+i*.15f);untouched.placed[i]=true;}
+            Check(!untouched.placed[4]&&Rules.Score(untouchedPuzzle,untouched).percent==100&&Rules.TopicPoints(untouchedPuzzle,untouched)[4]==20,"An untouched circle earns its full share when its distance is correctly ordered");
+            var beforeMarking=Rules.Score(untouchedPuzzle,untouched);var beforeAwards=Rules.TopicPoints(untouchedPuzzle,untouched);
+            for(int i=0;i<5;i++)untouched.placed[i]=false;
+            Check(Rules.Score(untouchedPuzzle,untouched).percent==beforeMarking.percent&&string.Join(",",Rules.TopicPoints(untouchedPuzzle,untouched))==string.Join(",",beforeAwards),"Movement flags never change original comparison scoring or awards");
+            Debug.Log("NEARDLE UNTOUCHED PASS: untouched circles earn correct comparison points; movement flags never affect scoring.");
             var p = bank.puzzles[0];
             var tiePuzzle = new Puzzle {id = "ties", tieTolerance = 0.01f, topics = new[] {new Topic {similarity = 0.2f}, new Topic {similarity = 0.205f}, new Topic {similarity = 0.1f}}};
             var tieState = new RoundState {positions = new[] {Vector2.right * 0.3f, Vector2.right * 0.2f, Vector2.right * 0.8f}, placed = new[] {true, true, true}};

@@ -19,21 +19,20 @@
     @media (prefers-reduced-motion: reduce) { #progress { transition: none; } }
   </style>
   <link rel="stylesheet" href="nearer-ui.css">
-  <link rel="stylesheet" href="nearer-rank.css">
+  <link rel="stylesheet" href="nearer-circle.css">
 </head>
 <body>
-  <p id="keyboard-help">Neardle. Select a topic, then select a rank from 1, most similar, to 5, least similar. You can also drag topics into boxes. Use number keys 1 to 5 to place a focused topic. The right box earns 20 points; one box away earns 10.</p>
+  <p id="keyboard-help">Neardle. Drag a topic toward the center for a stronger connection, or away for a weaker connection. Tab selects topics. Arrow keys move them; Shift moves in larger steps. Reveal scores the order of the connections and shows green target circles.</p>
   <div id="nearer-app">
     <header class="site-header"><span class="wordmark">neardle</span><nav><button id="stats-button">Stats</button><button id="images-toggle" disabled>Images on</button><button id="help-button">How to play</button></nav></header>
     <main>
       <div class="edition" id="map-number">A LINE OF CONNECTION</div>
-      <div class="question-heading"><div id="anchor-portrait"></div><h1 id="prompt">A sense of connection.</h1></div>
-      <p class="intro-copy">Rank these from most similar to least similar. We compare their Wikipedia links.</p>
+      <div class="question-heading"><h1 id="prompt">A sense of connection.</h1></div>
+      <p class="intro-copy">Move closer matches toward the center. We compare their Wikipedia links.</p>
       <p id="result-score" class="result-score" role="status" aria-live="polite" hidden></p>
       <div class="game-layout">
-        <section class="ranking-field" aria-label="Rank five topics by similarity">
-          <span id="anchor-name" hidden></span>
-          <div id="lanes" class="ranking-game"></div>
+        <section class="circle-field" aria-label="Arrange topics around the reference, stronger connections nearer">
+          <div id="lanes" class="orbit-stage"></div>
         </section>
         <aside id="paths-panel" class="paths-panel" aria-label="Shared links for all five topics" hidden><h2>Shared links</h2><p class="path-intro">Outgoing links in common. Similarity adjusts for article size.</p><div id="path-rows"></div></aside>
       </div>

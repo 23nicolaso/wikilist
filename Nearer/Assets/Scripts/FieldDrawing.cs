@@ -30,25 +30,25 @@ namespace Nearer
         public void Configure(Vector2 origin,float size,RoundState round,Vector2[] display,Vector2[] original,int selection,Color guide,Color accent,bool correcting,float minimum=0,bool[] awarded=null)
         {
             reference.style.display=near.style.display=far.style.display=DisplayStyle.None;
-            Color green=new Color(0.204f,0.525f,0.365f,1);
+            foreach(var tick in ticks)tick.style.display=DisplayStyle.None;foreach(var number in numbers)number.style.display=DisplayStyle.None;
+            Color green=new Color(0.17f,0.49f,0.30f,1);
             for(int i=0;i<5;i++)
             {
-                float y=origin.y+display[i].y,axisY=y+52;
-                Set(guides[i],origin.x+minimum,axisY,size-minimum,1,new Color(accent.r,accent.g,accent.b,0.4f));
-                for(int tick=0;tick<=50;tick++)
-                {
-                    float x=origin.x+Mathf.Lerp(minimum,size,tick/50f);Set(ticks[i*51+tick],x,axisY,1,tick%5==0?11:5,accent);
-                    if(tick%5==0){var label=numbers[i*11+tick/5];label.style.left=x-8;label.style.top=axisY+13;}
-                }corrections[i].style.display=DisplayStyle.None;
+                var ring=guides[i];ring.style.display=i<4?DisplayStyle.Flex:DisplayStyle.None;
+                float r=Mathf.Lerp(minimum,size,i/3f);Set(ring,origin.x-r,origin.y-r,r*2,r*2,Color.clear);
+                ring.style.borderTopWidth=ring.style.borderRightWidth=ring.style.borderBottomWidth=ring.style.borderLeftWidth=1;
+                ring.style.borderTopLeftRadius=ring.style.borderTopRightRadius=ring.style.borderBottomLeftRadius=ring.style.borderBottomRightRadius=r;
+                var tint=new Color(accent.r,accent.g,accent.b,.18f);ring.style.borderTopColor=ring.style.borderRightColor=ring.style.borderBottomColor=ring.style.borderLeftColor=tint;
+                corrections[i].style.display=DisplayStyle.None;
                 bool show=round.revealed&&(awarded==null?correcting:awarded[i]);originals[i].style.display=show?DisplayStyle.Flex:DisplayStyle.None;
-                originals[i].style.opacity=1;
                 originals[i].style.borderTopColor=originals[i].style.borderRightColor=originals[i].style.borderBottomColor=originals[i].style.borderLeftColor=green;
-                Set(originals[i],origin.x+original[i].x-30,y-30,60,60,Color.clear);
+                Set(originals[i],origin.x+original[i].x-30,origin.y+original[i].y-30,60,60,Color.clear);
+                originals[i].style.borderTopLeftRadius=originals[i].style.borderTopRightRadius=originals[i].style.borderBottomLeftRadius=originals[i].style.borderBottomRightRadius=30;
+                originals[i].style.opacity=selection<0||selection==i?1:.55f;
                 for(int dot=0;dot<25;dot++)
                 {
-                    var mark=dots[i,dot];mark.style.display=show&&Mathf.Abs(original[i].x-display[i].x)>1?DisplayStyle.Flex:DisplayStyle.None;
-                    float t=dot/24f;float x=origin.x+Mathf.Lerp(display[i].x,original[i].x,t);float dy=y+30+4*t*(1-t)*16;
-                    Set(mark,x,dy,3,3,green);mark.style.opacity=1;
+                    var mark=dots[i,dot];mark.style.display=show&&Vector2.Distance(original[i],display[i])>1?DisplayStyle.Flex:DisplayStyle.None;
+                    Vector2 point=origin+Vector2.Lerp(display[i],original[i],dot/24f);Set(mark,point.x,point.y,3,3,green);
                 }
             }
             NeedsUpdate=false;

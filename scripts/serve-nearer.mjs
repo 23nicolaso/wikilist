@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 
 const build = resolve(dirname(fileURLToPath(import.meta.url)), '../Nearer/Builds/Web');
 const port = Number(process.env.PORT || 4173);
-const mime = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'application/javascript', '.wasm': 'application/wasm', '.data': 'application/octet-stream', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.ico': 'image/x-icon'};
+const mime = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'application/javascript', '.wasm': 'application/wasm', '.data': 'application/octet-stream', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.ico': 'image/x-icon', '.wav': 'audio/wav'};
 createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');

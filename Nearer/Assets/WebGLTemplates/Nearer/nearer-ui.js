@@ -1,9 +1,36 @@
 (function () {
   'use strict';
   const $ = id => document.getElementById(id);
-  let engine = null, model = null, puzzleId = '', rows = [], boxes = [], tray = null, anchorPortrait = null;
-  let selectedTopic = -1, drag = null, ghost = null;
+  let engine = null, model = null, puzzleId = '', rows = [], anchorPortrait = null;
+  let selectedTopic = -1, drag = null;
   let media = new Map(), pathSelection = null, pathsPuzzle = '', previousFocus = null;
+  let audioContext = null;
+  const soundBuffers = new Map();
+  const soundFiles = { start: 'Sounds/score-click.wav', complete: 'Sounds/score-complete.wav', next: 'Sounds/round-next.wav' };
+  function prepareAudio() {
+    try {
+      const Context = window.AudioContext || window.webkitAudioContext;
+      if (!Context) return null;
+      if (!audioContext) audioContext = new Context();
+      // Resume in the Reveal button's user gesture so the later completion can play.
+      const resumed = audioContext.resume(); resumed?.catch(() => {});
+      for (const [name, file] of Object.entries(soundFiles)) {
+        if (!soundBuffers.has(name)) soundBuffers.set(name, fetch(file).then(response => {
+          if (!response.ok) throw Error('Sound unavailable'); return response.arrayBuffer();
+        }).then(bytes => audioContext.decodeAudioData(bytes)).catch(() => null));
+      }
+      return audioContext;
+    } catch (_) { return null; }
+  }
+  function playSound(name) {
+    const context = prepareAudio(); if (!context) return;
+    soundBuffers.get(name)?.then(buffer => {
+      if (!buffer || context.state !== 'running') return;
+      const source = context.createBufferSource(), gain = context.createGain();
+      source.buffer = buffer; gain.gain.value = name === 'start' ? 0.55 : 0.65;
+      source.connect(gain); gain.connect(context.destination); source.start();
+    }).catch(() => {});
+  }
   const statsKey = 'neardle.stats.v1';
   let rounds = [], persistentStats = true, resultFocus = null;
   const popupRounds = new Set();
@@ -86,124 +113,86 @@
       view.image.hidden = false; view.initial.hidden = true;
     }
   }
-  function updateSelection() {
-    rows.forEach((row, index) => { row.card.classList.toggle('selected', index === selectedTopic); row.card.setAttribute('aria-pressed', String(index === selectedTopic)); });
-    boxes.forEach(box => box.root.classList.toggle('ready-to-place', selectedTopic >= 0 && !model?.revealed));
-    const returnButton = document.querySelector('.return-topic'); if (returnButton) returnButton.hidden = selectedTopic < 0 || model?.revealed;
+  const innerOrbit = 110, outerOrbit = 232;
+  function point(topic, reference = false) {
+    const magnitude = Math.hypot(topic.x, topic.y), radius = innerOrbit + fraction(reference ? topic.reference : topic.distance) * (outerOrbit - innerOrbit);
+    return { x: 300 + (magnitude ? topic.x / magnitude : 0) * radius, y: 300 + (magnitude ? topic.y / magnitude : -1) * radius };
   }
-  function chooseTopic(index) {
-    if (!model || model.revealed || model.animating || !engine) return;
-    selectedTopic = selectedTopic === index ? -1 : index; updateSelection();
-    if (selectedTopic >= 0) send('select', { index });
+  function stopDrag() { drag = null; }
+  function placeOrbit(index, x, y) {
+    if (!engine || !model || model.revealed || model.animating) return;
+    const length = Math.hypot(x, y), distance = fraction((length - innerOrbit) / (outerOrbit - innerOrbit));
+    const magnitude = 0.18 + distance * 0.79;
+    const px = length > 0.001 ? x / length * magnitude : 0, py = length > 0.001 ? y / length * magnitude : -magnitude;
+    model.topics[index].x = px; model.topics[index].y = py; model.topics[index].distance = distance;
+    renderBoard(model); send('circle', { index, x: px, y: py });
   }
-  function assign(index, slot) {
-    if (!model || model.revealed || model.animating || !engine || index < 0) return;
-    const slots = model.topics.map(topic => topic.slot);
-    const old = slots[index], occupant = slot < 0 ? -1 : slots.indexOf(slot);
-    if (occupant >= 0 && occupant !== index) slots[occupant] = old;
-    slots[index] = slot;
-    model.topics.forEach((topic, i) => { topic.slot = slots[i]; });
-    selectedTopic = -1; renderBoard(model); send('rank', { slots });
-  }
-  function stopDrag() {
-    if (drag) rows[drag.index]?.card.classList.remove('dragging-topic');
-    ghost?.remove(); ghost = null; drag = null;
-    boxes.forEach(box => box.root.classList.remove('drop-over'));
+  function stagePoint(event) {
+    const bounds = $('lanes').getBoundingClientRect();
+    return { x: (event.clientX - bounds.left) / bounds.width * 600, y: (event.clientY - bounds.top) / bounds.height * 600 };
   }
   function createLanes(state) {
-    stopDrag(); selectedTopic = -1; rows = new Array(5); boxes = [];
-    $('lanes').replaceChildren(); $('anchor-portrait').replaceChildren();
-    anchorPortrait = portrait($('anchor-portrait'), state.anchorTitle);
-    const board = element('div', 'rank-board'); board.setAttribute('aria-label', 'Five ranks, most similar to least similar');
-    for (let slot = 0; slot < 5; slot++) {
-      const root = element('section', 'rank-slot'); root.dataset.rank = slot;
-      const target = element('button', 'slot-target'); target.type = 'button';
-      target.append(element('span', 'rank-number', String(slot + 1)), element('span', 'rank-caption', slot === 0 ? 'Most similar' : slot === 4 ? 'Least similar' : 'Rank ' + (slot + 1)));
-      target.setAttribute('aria-label', 'Place selected topic in rank ' + (slot + 1) + (slot === 0 ? ', most similar' : slot === 4 ? ', least similar' : ''));
-      const guess = element('div', 'slot-guess'), empty = element('span', 'slot-empty', 'Drop here'); guess.append(empty);
-      const answer = element('div', 'slot-answer'); answer.hidden = true;
-      answer.append(element('span', 'answer-caption', 'Correct placement'));
-      const correctIndex = state.correctOrder[slot], correctTopic = state.topics[correctIndex];
-      const photo = portrait(answer, correctTopic.title); answer.append(element('span', 'answer-name', correctTopic.label));
-      root.append(target, guess, answer); board.append(root);
-      root.addEventListener('click', event => {
-        if (event.target.closest?.('.rank-topic') || model?.revealed) return;
-        if (selectedTopic >= 0) assign(selectedTopic, slot);
-        else { text($('round-status'), 'Select a topic first, then choose its box.'); rows.find(row => row.card.parentElement === tray)?.card.focus(); }
-      });
-      boxes.push({ root, target, guess, empty, answer, photo });
-    }
-    const traySection = element('section', 'tray-section');
-    const trayHeader = element('div', 'tray-header'); trayHeader.append(element('h2', '', 'Your topics'), element('p', '', 'Drag a topic into a box, or select a topic and then a box.'));
-    tray = element('div', 'topic-tray'); tray.setAttribute('aria-label', 'Topics waiting to be ranked');
-    const returnButton = element('button', 'return-topic', 'Return selected topic'); returnButton.type = 'button';
-    returnButton.addEventListener('click', () => { if (selectedTopic >= 0) assign(selectedTopic, -1); });
-    trayHeader.append(returnButton); traySection.append(trayHeader, tray); $('lanes').append(board, traySection);
+    stopDrag(); selectedTopic = -1; rows = new Array(5); $('lanes').replaceChildren();
+    const guides = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); guides.classList.add('orbit-guides'); guides.setAttribute('viewBox', '0 0 600 600'); guides.setAttribute('aria-hidden', 'true');
+    [110, 150, 190, 232].forEach(radius => {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', '300'); circle.setAttribute('cy', '300'); circle.setAttribute('r', String(radius)); guides.append(circle);
+    });
+    const connectors = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); connectors.classList.add('orbit-connectors'); connectors.setAttribute('viewBox', '0 0 600 600'); connectors.setAttribute('aria-hidden', 'true');
+    const center = element('div', 'orbit-center'); anchorPortrait = portrait(center, state.anchorTitle);
+    const label = element('span', 'orbit-anchor', state.anchor); label.id = 'anchor-name'; center.append(label);
+    $('lanes').append(guides, connectors, center);
     (state.order || [0, 1, 2, 3, 4]).forEach(index => {
-      const topic = state.topics[index], card = element('button', 'rank-topic'); card.type = 'button'; card.dataset.index = index;
-      card.setAttribute('aria-label', topic.label + '. Select, then choose a rank; or use keys 1 to 5.');
-      const photo = portrait(card, topic.title); card.append(element('span', 'rank-topic-name', topic.label));
-      const badge = element('span', 'rank-award'); badge.hidden = true; card.append(badge);
-      let suppressClick = false;
-      card.addEventListener('click', () => { if (suppressClick) { suppressClick = false; return; } chooseTopic(index); });
-      card.addEventListener('keydown', event => {
-        if (model?.revealed || model?.animating) return;
-        if (/^[1-5]$/.test(event.key)) { event.preventDefault(); assign(index, Number(event.key) - 1); }
-        else if (event.key === 'Backspace' || event.key === 'Delete') { event.preventDefault(); assign(index, -1); }
-        else if (event.key === 'Escape') { selectedTopic = -1; updateSelection(); stopDrag(); }
-      });
+      const topic = state.topics[index];
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line'); line.classList.add('orbit-correction'); line.setAttribute('vector-effect', 'non-scaling-stroke'); connectors.append(line);
+      const target = element('span', 'orbit-target'); target.hidden = true; target.setAttribute('aria-hidden', 'true'); target.title = topic.label + ': correct distance';
+      const card = element('button', 'orbit-topic'); card.type = 'button'; card.dataset.index = index;
+      const badge = element('span', 'orbit-award'); badge.hidden = true;
+      const photo = portrait(card, topic.title); card.append(element('span', 'orbit-name', topic.label), badge);
+      card.addEventListener('click', () => { selectedTopic = index; send('select', { index }); renderBoard(model); });
       card.addEventListener('pointerdown', event => {
         if ((event.button !== undefined && event.button !== 0) || !engine || model?.revealed || model?.animating) return;
-        drag = { index, pointer: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
-        card.setPointerCapture?.(event.pointerId);
+        const cursor = stagePoint(event), current = point(model.topics[index]);
+        drag = { index, pointer: event.pointerId, offsetX: current.x - cursor.x, offsetY: current.y - cursor.y };
+        selectedTopic = index; send('select', { index }); card.setPointerCapture?.(event.pointerId);
       });
       card.addEventListener('pointermove', event => {
         if (!drag || drag.index !== index || drag.pointer !== event.pointerId) return;
-        if (!drag.moved && Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 6) {
-          drag.moved = true; ghost = card.cloneNode(true); ghost.classList.add('drag-ghost'); ghost.setAttribute('aria-hidden', 'true'); ghost.tabIndex = -1; document.body.append(ghost); card.classList.add('dragging-topic');
-        }
-        if (!drag.moved) return;
-        event.preventDefault(); ghost.style.left = event.clientX + 12 + 'px'; ghost.style.top = event.clientY + 12 + 'px';
-        const over = document.elementFromPoint?.(event.clientX, event.clientY)?.closest?.('[data-rank]');
-        boxes.forEach(box => box.root.classList.toggle('drop-over', box.root === over));
+        event.preventDefault(); const cursor = stagePoint(event);
+        placeOrbit(index, cursor.x + drag.offsetX - 300, cursor.y + drag.offsetY - 300);
       });
-      card.addEventListener('pointerup', event => {
-        if (!drag || drag.index !== index || drag.pointer !== event.pointerId) return;
-        if (drag.moved) {
-          suppressClick = true;
-          const over = document.elementFromPoint?.(event.clientX, event.clientY);
-          const slot = over?.closest?.('[data-rank]');
-          if (slot) assign(index, Number(slot.dataset.rank));
-          else if (over?.closest?.('.topic-tray')) assign(index, -1);
-        }
-        stopDrag();
+      card.addEventListener('pointerup', stopDrag); card.addEventListener('pointercancel', stopDrag); card.addEventListener('lostpointercapture', stopDrag);
+      card.addEventListener('keydown', event => {
+        if (!model || model.revealed || model.animating) return;
+        const current = point(model.topics[index]), step = event.shiftKey ? 24 : 8;
+        let x = current.x - 300, y = current.y - 300;
+        if (event.key === 'ArrowLeft') x -= step;
+        else if (event.key === 'ArrowRight') x += step;
+        else if (event.key === 'ArrowUp') y -= step;
+        else if (event.key === 'ArrowDown') y += step;
+        else if (event.key === 'Home' || event.key === 'End') { const ratio = (event.key === 'Home' ? innerOrbit : outerOrbit) / Math.hypot(x, y); x *= ratio; y *= ratio; }
+        else return;
+        event.preventDefault(); selectedTopic = index; placeOrbit(index, x, y);
       });
-      card.addEventListener('pointercancel', stopDrag); card.addEventListener('lostpointercapture', stopDrag);
-      rows[index] = { card, photo, badge }; tray.append(card);
+      $('lanes').append(target, card); rows[index] = { card, photo, badge, target, line };
     });
     pathsPuzzle = ''; pathSelection = null;
   }
   function renderBoard(state) {
+    if (!state) return;
     rows.forEach((row, index) => {
-      const topic = state.topics[index], parent = topic.slot >= 0 ? boxes[topic.slot].guess : tray;
-      if (row.card.parentElement !== parent) parent.append(row.card);
-      row.card.disabled = !engine || state.animating || state.revealed;
-      row.card.setAttribute('aria-label', topic.label + (topic.slot >= 0 ? ', rank ' + (topic.slot + 1) : ', not yet ranked') + (state.revealed ? ', ' + topic.points + ' points' : '. Select, then choose a rank; or use keys 1 to 5.'));
-      text(row.badge, '+' + topic.points + ' points' + (topic.points === 10 ? ' - one away' : '')); row.badge.hidden = !state.revealed || !topic.awarded;
-      row.card.classList.toggle('placement-correct', state.revealed && topic.awarded && topic.points === 20);
-      row.card.classList.toggle('placement-close', state.revealed && topic.awarded && topic.points === 10);
-      row.card.classList.toggle('placement-incorrect', state.revealed && topic.awarded && topic.points === 0);
+      const topic = state.topics[index], guess = point(topic), target = point(topic, true);
+      row.card.style.left = percent(guess.x / 600); row.card.style.top = percent(guess.y / 600);
+      row.card.disabled = !engine || state.animating;
+      row.card.classList.toggle('selected', selectedTopic === index);
+      row.card.setAttribute('aria-label', topic.label + ', distance ' + Math.round(topic.distance * 100) + ' out of 100' + (state.revealed ? ', ' + topic.points + ' points' : '. Drag or use arrow keys.'));
+      text(row.badge, '+' + topic.points + ' points'); row.badge.hidden = !state.revealed || !topic.awarded;
+      row.target.style.left = percent(target.x / 600); row.target.style.top = percent(target.y / 600); row.target.hidden = !state.revealed || !topic.awarded;
+      row.line.setAttribute('x1', String(guess.x)); row.line.setAttribute('y1', String(guess.y)); row.line.setAttribute('x2', String(target.x)); row.line.setAttribute('y2', String(target.y));
+      row.line.style.display = state.revealed && topic.awarded && Math.abs(topic.reference - topic.distance) > 0.001 ? '' : 'none';
+      row.line.style.opacity = selectedTopic < 0 || selectedTopic === index ? '1' : '0.55'; row.target.style.opacity = row.line.style.opacity;
+      row.target.classList.toggle('selected-target', selectedTopic === index);
     });
-    boxes.forEach((box, slot) => {
-      const index = state.topics.findIndex(topic => topic.slot === slot), topic = state.topics[index];
-      box.empty.hidden = index >= 0; box.target.disabled = !engine || state.revealed || state.animating;
-      box.answer.hidden = !state.revealed || !topic?.awarded;
-      text(box.answer.querySelector('.answer-caption'), topic?.points === 20 && index !== state.correctOrder[slot] ? 'Near tie: either fits' : 'Correct placement');
-      box.root.classList.toggle('revealed-slot', !box.answer.hidden);
-    });
-    document.querySelector('.tray-section').hidden = state.revealed;
-    document.querySelector('.return-topic').hidden = selectedTopic < 0 || state.revealed;
-    updateSelection();
   }
   function renderPaths(state) {
     const panel = $('paths-panel'); panel.hidden = !state.revealed || state.animating;
@@ -245,20 +234,25 @@
     $('sources-button').disabled = !engine;
     $('result-score').hidden = false; $('result-score').style.visibility = state.revealed ? 'visible' : 'hidden';
     $('result-score').setAttribute('aria-hidden', String(!state.revealed));
-    text($('result-score'), state.score + ' / 100 points' + (state.animating ? '' : ' · ' + state.correct + ' of ' + state.total + ' boxes correct'));
-    if (state.revealed) selectedTopic = -1;
+    text($('result-score'), state.score + ' / 100 points' + (state.animating ? '' : ' · ' + state.correct + ' of ' + state.total + ' comparisons correct'));
+    selectedTopic = state.selected;
     renderBoard(state);
     text($('main-action'), state.animating ? (state.correcting ? 'Correcting…' : 'Counting points…') : state.revealed ? 'Next' : 'Reveal');
-    $('main-action').disabled = !engine || state.animating || (!state.revealed && state.topics.some(topic => topic.slot < 0));
+    $('main-action').disabled = !engine || state.animating;
     $('share-action').hidden = !state.revealed || state.animating;
     $('paths-button').hidden = !state.revealed || state.animating;
-    text($('round-status'), state.notice || (state.animating ? 'Revealing the correct order, from most similar to least similar.' : state.revealed ? '20 points for the right box, 10 for one box away. Near ties accept either order.' : 'Fill all five boxes. Swapping topics is fine; each box holds one.'));
+    text($('round-status'), state.notice || (state.animating ? 'Revealing points and correct distances, clockwise.' : state.revealed ? 'Select a photo to highlight its green target circle. Points reward the order of your connections.' : 'Drag closer matches toward the center. Untouched topics count too.'));
     renderPaths(state);
+    if (state.revealed && state.animating && previous?.puzzleId === state.puzzleId) {
+      state.topics.forEach((topic, index) => {
+        if (topic.awarded && !previous.topics[index].awarded) playSound('start');
+      });
+    }
     if (state.revealed && !state.animating && state.topics.every(topic => topic.awarded) && Number.isFinite(state.score) && state.score >= 0 && state.score <= 100) {
       recordRound(state);
       if (!popupRounds.has(state.puzzleId)) {
         popupRounds.add(state.puzzleId);
-        if (previous?.puzzleId === state.puzzleId && previous.animating) showResults(true);
+        if (previous?.puzzleId === state.puzzleId && previous.animating) { playSound('complete'); showResults(true); }
       }
     }
   }
@@ -269,16 +263,25 @@
   $('stats-button').addEventListener('click', () => showResults(false));
   $('close-results').addEventListener('click', closeResults);
   $('review-results').addEventListener('click', closeResults);
-  $('next-result').addEventListener('click', () => { closeResults(); if (model?.revealed && !model.animating) send('next'); });
+  function nextRound() {
+    if (!engine || !model?.revealed || model.animating) return;
+    playSound('next'); send('next');
+  }
+  $('next-result').addEventListener('click', () => { closeResults(); nextRound(); });
   $('results').addEventListener('close', () => resultFocus?.focus());
-  $('main-action').addEventListener('click', () => { if (model && !model.animating) send(model.revealed ? 'next' : 'reveal'); });
+  $('main-action').addEventListener('click', () => {
+    if (!model || model.animating || !engine) return;
+    if (model.revealed) nextRound();
+    else { prepareAudio(); send('reveal'); }
+  });
   $('images-toggle').addEventListener('click', () => send('images'));
   $('share-action').addEventListener('click', () => send('share'));
   $('help-button').addEventListener('click', () => {
     const body = showDetails('A sense of connection');
-    body.append(element('p', '', 'Place the five topics in order: most similar in box 1, least similar in box 5. We compare the links their Wikipedia pages share, adjusted for page size.'));
-    body.append(element('p', '', 'Drag a circle and its name into a box. You can also select a topic and then a box, or focus a topic and press 1 to 5. Dropping onto an occupied box swaps the two topics. Delete returns a topic to the tray.'));
-    body.append(element('p', '', 'The right box earns 20 points; one box away earns 10; farther away earns 0. Near ties accept either order. Reveal shows one correct order, one box at a time, then your score and personal stats.'));
+    body.append(element('p', '', 'Move stronger connections nearer the center and weaker connections farther away. We compare shared Wikipedia links, adjusted for page size.'));
+    body.append(element('p', '', 'Drag a photo, or focus it and use the arrow keys. Shift moves farther. Home and End move to the nearest and farthest distances.'));
+    body.append(element('p', '', 'Untouched topics count too. Scoring rewards the order of your connections. Each correct comparison splits its points between the two topics. Near ties accept either order; the awards add up to 100 possible points.'));
+    body.append(element('p', '', 'Reveal runs clockwise. Your photos stay where you put them; green dashed lines point to small green circles at the correct distances. Select a photo to highlight its correction. Best, average, and recent scores remain saved in this browser.'));
     const option = element('label', 'motion-option'); const checkbox = element('input'); checkbox.type = 'checkbox'; checkbox.checked = !!model?.reducedMotion; checkbox.disabled = !engine;
     checkbox.addEventListener('change', () => send('motion', { value: checkbox.checked ? 'reduced' : 'full' }));
     option.append(checkbox, element('span', '', 'Reduce motion')); body.append(option);
@@ -323,6 +326,6 @@
   };
   fetch('media.json').then(response => { if (!response.ok) throw Error('Media unavailable'); return response.json(); }).then(bank => {
     media = new Map(bank.entries.map(entry => [entry.title, entry]));
-    if (anchorPortrait) updatePortrait(anchorPortrait); rows.forEach(row => updatePortrait(row.photo)); boxes.forEach(box => updatePortrait(box.photo));
+    if (anchorPortrait) updatePortrait(anchorPortrait); rows.forEach(row => updatePortrait(row.photo));
   }).catch(() => { /* Initials remain usable when a portrait is unavailable. */ });
 }());

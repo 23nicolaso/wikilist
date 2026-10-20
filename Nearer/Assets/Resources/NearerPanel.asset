@@ -32,7 +32,7 @@ MonoBehaviour:
   m_BindingLogLevel: 0
   m_ClearDepthStencil: 1
   m_ClearColor: 1
-  m_ColorClearValue: {r: 0.930361, g: 0.9098039, b: 0.93535644, a: 1}
+  m_ColorClearValue: {r: 0.9490196, g: 0.9098039, b: 0.8980392, a: 1}
   m_VertexBudget: 0
   m_ExtraVertexChannels: 0
   m_TextureSlotCount: 1
