@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#edf2f5">
+  <meta name="description" content="A daily map of connections. Place stronger connections nearer.">
+  <title>Neardle</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #edf2f5; color: #202b38; font-family: Helvetica, Arial, sans-serif; }
+    #game { display: block; width: 100%; height: 100%; outline: none; touch-action: none; }
+    #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+    #loading strong { font-size: 27px; letter-spacing: -1px; }
+    #track { margin-top: 22px; width: 92px; height: 2px; background: #c6d1da; }
+    #progress { width: 0; height: 100%; background: #345cda; transition: width 180ms; }
+    #message { max-width: 340px; text-align: center; font-size: 13px; line-height: 1.6; padding: 0 24px; }
+    #keyboard-help { position: absolute; left: -10000px; top: 0; }
+    @media (prefers-reduced-motion: reduce) { #progress { transition: none; } }
+  </style>
+  <link rel="stylesheet" href="nearer-ui.css">
+  <link rel="stylesheet" href="nearer-circle.css">
+</head>
+<body>
+  <p id="keyboard-help">Neardle. Drag a topic toward the center for a stronger connection, or away for a weaker connection. Tab selects topics. Arrow keys move them; Shift moves in larger steps. Reveal scores the order of the connections and shows green target circles.</p>
+  <div id="nearer-app">
+    <header class="site-header"><span class="wordmark">neardle</span><nav><button id="stats-button">Stats</button><button id="images-toggle" disabled>Images on</button><button id="help-button">How to play</button></nav></header>
+    <main>
+      <div class="edition" id="map-number">A LINE OF CONNECTION</div>
+      <div class="question-heading"><h1 id="prompt">A sense of connection.</h1></div>
+      <p class="intro-copy">Move closer matches toward the center. We compare their Wikipedia links.</p>
+      <p id="result-score" class="result-score" role="status" aria-live="polite" hidden></p>
+      <div class="game-layout">
+        <section class="circle-field" aria-label="Arrange topics around the reference, stronger connections nearer">
+          <div id="lanes" class="orbit-stage"></div>
+        </section>
+        <aside id="paths-panel" class="paths-panel" aria-label="Shared links for all five topics" hidden><h2>Shared links</h2><p class="path-intro">Outgoing links in common. Similarity adjusts for article size.</p><div id="path-rows"></div></aside>
+      </div>
+      <div class="round-controls"><button id="main-action" class="primary" disabled>Reveal</button><button id="share-action" hidden>Share</button><button id="paths-button" hidden>Connections</button></div>
+      <p id="round-status" class="round-status" role="status" aria-live="polite">Opening your next map…</p>
+    </main>
+    <footer><button id="sources-button" disabled>Sources and image credits</button><span>Wikipedia contributors · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span></footer>
+  </div>
+  <dialog id="details"><button id="close-details" class="close-dialog" aria-label="Close details">Close ×</button><div id="dialog-body"></div></dialog>
+  <dialog id="results" aria-labelledby="results-title">
+    <button id="close-results" class="close-dialog" aria-label="Close results">Close</button>
+    <div class="results-heading"><p class="results-eyebrow">YOUR NEARDLE RECORD</p><h2 id="results-title">Round complete</h2></div>
+    <div class="results-overview"><div class="round-overview"><p id="score-caption" class="score-caption">This round</p><div id="score-ring" class="score-ring"><div><strong id="summary-score">0</strong><span>out of 100</span></div></div></div>
+    <div class="score-metrics"><div><span>Best score</span><strong id="best-score">0</strong></div><div><span>Average score</span><strong id="average-score">0</strong></div></div></div>
+    <p id="rounds-played" class="rounds-played"></p>
+    <section class="score-history" aria-label="Recent scores"><h3>Recent rounds</h3><div id="score-bars" class="score-bars"></div></section>
+    <p id="stats-storage" class="stats-storage">Saved on this browser.</p>
+    <div class="results-actions"><button id="review-results">Review answers</button><button id="next-result" class="primary">Next round</button></div>
+  </dialog>
+  <canvas id="game" tabindex="-1" aria-hidden="true"></canvas>
+  <div id="loading" role="status" aria-live="polite"><strong>neardle</strong><div id="track"><div id="progress"></div></div><p id="message"></p></div>
+  <script src="nearer-ui.js"></script>
+  <script>
+    const canvas = document.getElementById('game');
+    const loading = document.getElementById('loading');
+    const message = document.getElementById('message');
+    const build = 'Build';
+    const config = {
+      dataUrl: build + '/{{{ DATA_FILENAME }}}',
+      frameworkUrl: build + '/{{{ FRAMEWORK_FILENAME }}}',
+      codeUrl: build + '/{{{ CODE_FILENAME }}}',
+      streamingAssetsUrl: 'StreamingAssets',
+      companyName: 'Nearer', productName: 'Neardle', productVersion: '1.0',
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+      matchWebGLToCanvasSize: true,
+      showBanner: function(text, type) { if (type === 'error') message.textContent = 'The map could not open. Refresh to try again.'; }
+    };
+    window.nearerPixelRatio = config.devicePixelRatio;
+    const loader = document.createElement('script');
+    loader.src = build + '/{{{ LOADER_FILENAME }}}';
+    loader.onload = function() {
+      createUnityInstance(canvas, config, function(progress) { document.getElementById('progress').style.width = Math.round(progress * 100) + '%'; }).then(function(instance) {
+        window.nearerInstance = instance;
+        loading.hidden = true;
+        loading.style.display = 'none';
+        window.nearerView.attachEngine(instance);
+      }).catch(function() { message.textContent = 'The map could not open. Refresh to try again.'; });
+    };
+    loader.onerror = function() { message.textContent = 'The map could not load. Refresh to try again.'; };
+    document.body.appendChild(loader);
+  </script>
+</body>
+</html>

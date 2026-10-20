@@ -3,3 +3,32 @@ site.tar.gz
 
 node_modules/
 article-fixture.html
+
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Bb]uilds/
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.pidb
+*.booproj
+*.opendb
+*.VC.db
+*.log
+*.stacktrace
+*.unitypackage
+.DS_Store
+Thumbs.db
+*.zip
+.nearer-local/
+.env
+.env.*
+!.env.example
+.dev.vars

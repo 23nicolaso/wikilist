@@ -1,0 +1,202 @@
+{
+  "version": "culture-1",
+  "collections": [
+    {
+      "id": "food",
+      "titles": [
+        "Starbucks",
+        "McDonald's",
+        "Burger King",
+        "KFC",
+        "Taco Bell",
+        "Wendy's",
+        "Subway (restaurant)",
+        "Chipotle Mexican Grill",
+        "Dunkin'",
+        "Domino's",
+        "Pizza Hut",
+        "Coca-Cola",
+        "Pepsi",
+        "Krispy Kreme",
+        "Chick-fil-A",
+        "Popeyes"
+      ]
+    },
+    {
+      "id": "screen",
+      "titles": [
+        "Christopher Nolan",
+        "Leonardo DiCaprio",
+        "Cillian Murphy",
+        "Margot Robbie",
+        "Tom Cruise",
+        "Florence Pugh",
+        "Zendaya",
+        "Timothée Chalamet",
+        "Emma Stone",
+        "Ryan Gosling",
+        "Scarlett Johansson",
+        "Robert Downey Jr.",
+        "Barbie (film)",
+        "Oppenheimer (film)",
+        "Inception",
+        "Interstellar (film)",
+        "Dune (2021 film)",
+        "Titanic (1997 film)",
+        "The Dark Knight",
+        "Top Gun: Maverick",
+        "Spider-Man: No Way Home",
+        "Avengers: Endgame"
+      ]
+    },
+    {
+      "id": "music",
+      "titles": [
+        "Taylor Swift",
+        "Beyoncé",
+        "Rihanna",
+        "Ariana Grande",
+        "Billie Eilish",
+        "Lady Gaga",
+        "Olivia Rodrigo",
+        "Dua Lipa",
+        "Sabrina Carpenter",
+        "The Weeknd",
+        "Kendrick Lamar",
+        "Drake (musician)",
+        "Bad Bunny",
+        "Harry Styles",
+        "Justin Bieber",
+        "Adele"
+      ]
+    },
+    {
+      "id": "games",
+      "titles": [
+        "Minecraft",
+        "Fortnite",
+        "Roblox",
+        "Grand Theft Auto V",
+        "The Legend of Zelda: Breath of the Wild",
+        "Super Mario Bros.",
+        "Animal Crossing: New Horizons",
+        "Stardew Valley",
+        "Undertale",
+        "Among Us",
+        "Pokémon",
+        "Nintendo",
+        "League of Legends",
+        "Valorant",
+        "Overwatch",
+        "The Sims 4",
+        "Steam (service)",
+        "PlayStation"
+      ]
+    },
+    {
+      "id": "internet",
+      "titles": [
+        "Apple Inc.",
+        "Microsoft",
+        "Google",
+        "YouTube",
+        "Netflix",
+        "Spotify",
+        "TikTok",
+        "Instagram",
+        "Amazon (company)",
+        "The Walt Disney Company",
+        "Marvel Studios",
+        "Pixar",
+        "Sony",
+        "Samsung",
+        "Nike, Inc.",
+        "Adidas"
+      ]
+    },
+    {
+      "id": "sport",
+      "titles": [
+        "LeBron James",
+        "Michael Jordan",
+        "Stephen Curry",
+        "Kobe Bryant",
+        "Shaquille O'Neal",
+        "Kevin Durant",
+        "Giannis Antetokounmpo",
+        "Lionel Messi",
+        "Cristiano Ronaldo",
+        "Kylian Mbappé",
+        "Neymar",
+        "Erling Haaland",
+        "Serena Williams",
+        "Naomi Osaka",
+        "Roger Federer",
+        "Rafael Nadal",
+        "Simone Biles",
+        "Usain Bolt"
+      ]
+    }
+  ],
+  "affinities": {
+    "Nike, Inc.": [
+      "sport"
+    ],
+    "Adidas": [
+      "sport"
+    ],
+    "Netflix": [
+      "screen"
+    ],
+    "The Walt Disney Company": [
+      "screen"
+    ],
+    "Marvel Studios": [
+      "screen"
+    ],
+    "Pixar": [
+      "screen"
+    ],
+    "Spotify": [
+      "music"
+    ],
+    "YouTube": [
+      "music"
+    ],
+    "Nintendo": [
+      "internet"
+    ],
+    "PlayStation": [
+      "internet"
+    ],
+    "Sony": [
+      "games"
+    ],
+    "Microsoft": [
+      "games"
+    ]
+  },
+  "labels": {
+    "Subway (restaurant)": "Subway",
+    "Chipotle Mexican Grill": "Chipotle",
+    "The Legend of Zelda: Breath of the Wild": "Breath of the Wild",
+    "Animal Crossing: New Horizons": "Animal Crossing",
+    "Steam (service)": "Steam",
+    "Grand Theft Auto V": "GTA V",
+    "The Sims 4": "The Sims",
+    "Apple Inc.": "Apple",
+    "Amazon (company)": "Amazon",
+    "The Walt Disney Company": "Disney",
+    "Nike, Inc.": "Nike",
+    "Drake (musician)": "Drake",
+    "Barbie (film)": "Barbie",
+    "Oppenheimer (film)": "Oppenheimer",
+    "Interstellar (film)": "Interstellar",
+    "Dune (2021 film)": "Dune",
+    "Titanic (1997 film)": "Titanic",
+    "Spider-Man: No Way Home": "Spider-Man",
+    "Avengers: Endgame": "Avengers",
+    "Giannis Antetokounmpo": "Giannis",
+    "Robert Downey Jr.": "Robert Downey Jr."
+  }
+}

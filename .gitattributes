@@ -1,0 +1,17 @@
+* text=auto
+*.cs text eol=lf
+*.uss text eol=lf
+*.tss text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.jslib text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+*.meta text eol=lf whitespace=-blank-at-eol
+*.asset text eol=lf whitespace=-blank-at-eol
+*.unity text eol=lf whitespace=-blank-at-eol
+*.png binary
+*.jpg binary
+*.ttf binary

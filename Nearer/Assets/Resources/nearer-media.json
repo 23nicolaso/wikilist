@@ -1,0 +1,724 @@
+{
+  "entries": [
+    {
+      "title": "Coca-Cola",
+      "resource": "Images/24a1bc1d4dfdc0c1",
+      "author": "DYVER",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Coca_Cola_Flasche_-_Original_Taste.jpg",
+      "file": "Coca_Cola_Flasche_-_Original_Taste.jpg"
+    },
+    {
+      "title": "Pepsi",
+      "resource": "Images/ca8ae4b9a9d98954",
+      "author": "™/®PepsiCo, Inc.",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Pepsi_2023.svg",
+      "file": "Pepsi_2023.svg"
+    },
+    {
+      "title": "Tom Cruise",
+      "resource": "Images/a5e6f00945e4912f",
+      "author": "Kevin Paul",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Tom_Cruise_at_53rd_Saturn_Awards_2026-01.jpg",
+      "file": "Tom_Cruise_at_53rd_Saturn_Awards_2026-01.jpg"
+    },
+    {
+      "title": "KFC",
+      "resource": "Images/c49fafe3c2cc45df",
+      "author": "Ktkvtsh",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Kentucky_Fried_Chicken_(Tallulah,_Louisiana)_01.jpg",
+      "file": "Kentucky_Fried_Chicken_(Tallulah,_Louisiana)_01.jpg"
+    },
+    {
+      "title": "Pizza Hut",
+      "resource": "Images/3e6bf4c69cfb1b3b",
+      "author": "Yum! Brands",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Pizza_Hut_2025.svg",
+      "file": "Pizza_Hut_2025.svg"
+    },
+    {
+      "title": "Taco Bell",
+      "resource": "Images/383335874afd3160",
+      "author": "Coolcaesar",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Tacobellheadquartersirvine.jpg",
+      "file": "Tacobellheadquartersirvine.jpg"
+    },
+    {
+      "title": "Leonardo DiCaprio",
+      "resource": "Images/6a384708ed3b17de",
+      "author": "Raph_PH",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:LeoPTABFI191125-28_(cropped).jpg",
+      "file": "LeoPTABFI191125-28_(cropped).jpg"
+    },
+    {
+      "title": "Subway (restaurant)",
+      "resource": "Images/6010f41194fd9f80",
+      "author": "Harrison Keely",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:A_Subway_restaurant_in_a_strip_mall_in_Franklin,_North_Carolina,_United_States.jpg",
+      "file": "A_Subway_restaurant_in_a_strip_mall_in_Franklin,_North_Carolina,_United_States.jpg"
+    },
+    {
+      "title": "Beyoncé",
+      "resource": "Images/e02bd8f2c9272bb8",
+      "author": "Raph_PH",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Beyonc%C3%A9_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_(10_of_118)_(52946364598)_(best_crop).jpg",
+      "file": "Beyoncé_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_(10_of_118)_(52946364598)_(best_crop).jpg"
+    },
+    {
+      "title": "Krispy Kreme",
+      "resource": "Images/ffa232212fd818b6",
+      "author": "Samuel Wiki",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "url": "https://commons.wikimedia.org/wiki/File:Krispy_Kreme_Cannington,_April_2022.jpg",
+      "file": "Krispy_Kreme_Cannington,_April_2022.jpg"
+    },
+    {
+      "title": "Burger King",
+      "resource": "Images/660470634afa9c56",
+      "author": "Burger King",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Burger_King_2020.svg",
+      "file": "Burger_King_2020.svg"
+    },
+    {
+      "title": "Robert Downey Jr.",
+      "resource": "Images/2a3e7839a1b4c2fa",
+      "author": "PhilipRomano",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:RobertDowneyJr-byPhilipRomano7_(cropped).jpg",
+      "file": "RobertDowneyJr-byPhilipRomano7_(cropped).jpg"
+    },
+    {
+      "title": "Christopher Nolan",
+      "resource": "Images/51969c1c34801a5c",
+      "author": "PhilipRomano",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:ChristopherNolan-byPhilipRomano_(cropped).jpg",
+      "file": "ChristopherNolan-byPhilipRomano_(cropped).jpg"
+    },
+    {
+      "title": "Starbucks",
+      "resource": "Images/761d08250b501dd8",
+      "author": "Coolcaesar",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Starbuckscenter.jpg",
+      "file": "Starbuckscenter.jpg"
+    },
+    {
+      "title": "Chipotle Mexican Grill",
+      "resource": "Images/b6b18ae8ee51b55e",
+      "author": "The Bushranger",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Chipotle,_Lecanto,_Florida.jpg",
+      "file": "Chipotle,_Lecanto,_Florida.jpg"
+    },
+    {
+      "title": "Dunkin' Donuts",
+      "resource": "Images/4ee9f869978d7882",
+      "author": "Harrison Keely",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:A_Dunkin%27_Donuts_restaurant_in_Hiawassee,_Georgia,_United_States_01.jpg",
+      "file": "A_Dunkin'_Donuts_restaurant_in_Hiawassee,_Georgia,_United_States_01.jpg"
+    },
+    {
+      "title": "Chick-fil-A",
+      "resource": "Images/28266b32a90d5da7",
+      "author": "Harrison Keely",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Chick-fil-A_fast_food_chain_restaurant_exterior_in_Cleveland,_Tennessee_05.jpg",
+      "file": "Chick-fil-A_fast_food_chain_restaurant_exterior_in_Cleveland,_Tennessee_05.jpg"
+    },
+    {
+      "title": "Cillian Murphy",
+      "resource": "Images/6c4773c3d00ff848",
+      "author": "Netflix",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Cillian_Murphy_at_the_London_premier_of_Steve_in_September_2025_(cropped).jpg",
+      "file": "Cillian_Murphy_at_the_London_premier_of_Steve_in_September_2025_(cropped).jpg"
+    },
+    {
+      "title": "Domino's",
+      "resource": "Images/70b76bdf5b76baf7",
+      "author": "MultiEditor03",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "url": "https://commons.wikimedia.org/wiki/File:Domino%E2%80%99s_Pizza_World_Resource_Center_in_Ann_Arbor,_Michigan_2026.jpg",
+      "file": "Domino’s_Pizza_World_Resource_Center_in_Ann_Arbor,_Michigan_2026.jpg"
+    },
+    {
+      "title": "Ryan Gosling",
+      "resource": "Images/7eb42e2007160874",
+      "author": "Raph_PH",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:GoslingBFI081223_(22_of_30)_(53388157347)_(cropped).jpg",
+      "file": "GoslingBFI081223_(22_of_30)_(53388157347)_(cropped).jpg"
+    },
+    {
+      "title": "Popeyes",
+      "resource": "Images/a93ffe3ae49be865",
+      "author": "Phillip Pessar",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Popeyes_Louisiana_Kitchen_(51195358373).jpg",
+      "file": "Popeyes_Louisiana_Kitchen_(51195358373).jpg"
+    },
+    {
+      "title": "McDonald's",
+      "resource": "Images/933aaa626fe2ec54",
+      "author": "McDonald's",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:McDonald%27s_Golden_Arches.svg",
+      "file": "McDonald's_Golden_Arches.svg"
+    },
+    {
+      "title": "Emma Stone",
+      "resource": "Images/3b5fa902fc501e51",
+      "author": "Harald Krichel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Emma_Stone_at_the_2025_Venice_Film_Festival-6313_(cropped).jpg",
+      "file": "Emma_Stone_at_the_2025_Venice_Film_Festival-6313_(cropped).jpg"
+    },
+    {
+      "title": "Taylor Swift",
+      "resource": "Images/3303debb639f6859",
+      "author": "iHeartRadioCA",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_(3).png",
+      "file": "Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_(3).png"
+    },
+    {
+      "title": "Margot Robbie",
+      "resource": "Images/0be25b5bde9f7893",
+      "author": "Ondine Goat",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "url": "https://commons.wikimedia.org/wiki/File:Margot_Robbie_Wuthering_Heights_premiere_(cropped).jpg",
+      "file": "Margot_Robbie_Wuthering_Heights_premiere_(cropped).jpg"
+    },
+    {
+      "title": "Scarlett Johansson",
+      "resource": "Images/0808d64ad8e5d681",
+      "author": "Harald Krichel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Scarlett_Johansson-8588.jpg",
+      "file": "Scarlett_Johansson-8588.jpg"
+    },
+    {
+      "title": "Wendy's",
+      "resource": "Images/45bdbe971e3bce96",
+      "author": "Nheyob",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Wendy%27s_flagship_restaurant_(Dublin,_Ohio).jpg",
+      "file": "Wendy's_flagship_restaurant_(Dublin,_Ohio).jpg"
+    },
+    {
+      "title": "Zendaya",
+      "resource": "Images/70c406ff2280aed9",
+      "author": "PhilipRomano",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Zendaya-byPhilipRomano.jpg",
+      "file": "Zendaya-byPhilipRomano.jpg"
+    },
+    {
+      "title": "Timothée Chalamet",
+      "resource": "Images/8d982df6e6e87946",
+      "author": "Harald Krichel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Timoth%C3%A9e_Chalamet-63482_(cropped).jpg",
+      "file": "Timothée_Chalamet-63482_(cropped).jpg"
+    },
+    {
+      "title": "Florence Pugh",
+      "resource": "Images/771afb97657e3754",
+      "author": "Frank Sun",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Florence_Pugh_at_the_2024_Toronto_International_Film_Festival_13_(cropped_2_%E2%80%93_color_adjusted).jpg",
+      "file": "Florence_Pugh_at_the_2024_Toronto_International_Film_Festival_13_(cropped_2_–_color_adjusted).jpg"
+    },
+    {
+      "title": "Apple Inc.",
+      "resource": "Images/2f5453242d726cc2",
+      "author": "Original:  Rob Janoff",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
+      "file": "Apple_logo_black.svg"
+    },
+    {
+      "title": "Microsoft",
+      "resource": "Images/ee0381b343f17910",
+      "author": "Jelson25",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg",
+      "file": "Aerial_Microsoft_West_Campus_August_2009.jpg"
+    },
+    {
+      "title": "Nintendo",
+      "resource": "Images/a046f2c96cea57ed",
+      "author": "Tokumeigakarinoaoshima",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Headquarters_of_Nintendo_Co.,_Ltd.jpg",
+      "file": "Headquarters_of_Nintendo_Co.,_Ltd.jpg"
+    },
+    {
+      "title": "Pokémon",
+      "resource": "Images/46525620596c3a76",
+      "author": "Pokémon, Nintendo/Creatures Inc./Game Freak Inc.",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:International_Pok%C3%A9mon_logo.svg",
+      "file": "International_Pokémon_logo.svg"
+    },
+    {
+      "title": "Google",
+      "resource": "Images/edf0e9090e19c0b3",
+      "author": "Asoundd",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Googleplex_HQ_(cropped).jpg",
+      "file": "Googleplex_HQ_(cropped).jpg"
+    },
+    {
+      "title": "Rihanna",
+      "resource": "Images/bf0b986ff8c445cf",
+      "author": "SIGMA",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Rihanna_Fenty_2018.png",
+      "file": "Rihanna_Fenty_2018.png"
+    },
+    {
+      "title": "YouTube",
+      "resource": "Images/32f2f6995e590503",
+      "author": "Lyles BBQ, Smile and Learn - English, The Flat Top King (previous screenshot: yumyotta)",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Youtube_interface,_showing_search_results_of_Burger_Recipe.png",
+      "file": "Youtube_interface,_showing_search_results_of_Burger_Recipe.png"
+    },
+    {
+      "title": "Adele",
+      "resource": "Images/2c65aab36d440c04",
+      "author": "Marc E.",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Adele_2016.jpg",
+      "file": "Adele_2016.jpg"
+    },
+    {
+      "title": "Lady Gaga",
+      "resource": "Images/587f7ee0dabaae06",
+      "author": "Carlos M. Vazquez II",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_at_Joe_Biden%27s_inauguration_(cropped_5).jpg",
+      "file": "Lady_Gaga_at_Joe_Biden's_inauguration_(cropped_5).jpg"
+    },
+    {
+      "title": "Spotify",
+      "resource": "Images/5c22f5e148e5b5ec",
+      "author": "Goombah",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "url": "https://commons.wikimedia.org/wiki/File:Spotify_HK_Stockholm.jpg",
+      "file": "Spotify_HK_Stockholm.jpg"
+    },
+    {
+      "title": "Drake (musician)",
+      "resource": "Images/a8f9ff7f4af81cce",
+      "author": "GabboT",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Drake_at_The_Carter_Effect_2017_(36818935200)_(cropped).jpg",
+      "file": "Drake_at_The_Carter_Effect_2017_(36818935200)_(cropped).jpg"
+    },
+    {
+      "title": "League of Legends",
+      "resource": "Images/0e7f8a79ec973f49",
+      "author": "Riot Games (Q1060165)",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:League_of_Legends_2019_vector.svg",
+      "file": "League_of_Legends_2019_vector.svg"
+    },
+    {
+      "title": "Justin Bieber",
+      "resource": "Images/e659f55cf96c262c",
+      "author": "Daniel Torok",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped_2).jpg",
+      "file": "P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped_2).jpg"
+    },
+    {
+      "title": "Ariana Grande",
+      "resource": "Images/48e3039e064e30dd",
+      "author": "Barbie Simons",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Ariana_Grande_promoting_Wicked_(2024).jpg",
+      "file": "Ariana_Grande_promoting_Wicked_(2024).jpg"
+    },
+    {
+      "title": "Kendrick Lamar",
+      "resource": "Images/fab80d429c4b48ab",
+      "author": "Raph_PH",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:KendrickSZASPurs230725-144_(cropped)_desaturated.jpg",
+      "file": "KendrickSZASPurs230725-144_(cropped)_desaturated.jpg"
+    },
+    {
+      "title": "The Weeknd",
+      "resource": "Images/dd63a427b29ce397",
+      "author": "Brian Ziff",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:The_Weeknd_Portrait_by_Brian_Ziff.jpg",
+      "file": "The_Weeknd_Portrait_by_Brian_Ziff.jpg"
+    },
+    {
+      "title": "Instagram",
+      "resource": "Images/9d55b22cf011732e",
+      "author": "Instagram / Wikimedia Foundation",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Instagram_screenshot_(12_January_2026,_16h30m39s,_UTC_-3).png",
+      "file": "Instagram_screenshot_(12_January_2026,_16h30m39s,_UTC_-3).png"
+    },
+    {
+      "title": "Harry Styles",
+      "resource": "Images/9035ef6e8db000dc",
+      "author": "Raph_PH",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:HarryStylesWembley170623_(65_of_93)_(52982678051)_(cropped_2).jpg",
+      "file": "HarryStylesWembley170623_(65_of_93)_(52982678051)_(cropped_2).jpg"
+    },
+    {
+      "title": "Sabrina Carpenter",
+      "resource": "Images/c36cd2f20f0702ed",
+      "author": "Raph_PH",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Sabrina_Carpenter_-_O2_Arena_2025_-_086_(cropped_2).jpg",
+      "file": "Sabrina_Carpenter_-_O2_Arena_2025_-_086_(cropped_2).jpg"
+    },
+    {
+      "title": "Dua Lipa",
+      "resource": "Images/7731c04b439c319e",
+      "author": "Harald Krichel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Dua_Lipa-69798_(cropped).jpg",
+      "file": "Dua_Lipa-69798_(cropped).jpg"
+    },
+    {
+      "title": "Olivia Rodrigo",
+      "resource": "Images/7bd444c27961cdc9",
+      "author": "Raph_PH",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Glasto2025-546_(cropped)_2.jpg",
+      "file": "Glasto2025-546_(cropped)_2.jpg"
+    },
+    {
+      "title": "Billie Eilish",
+      "resource": "Images/21eddd0680025a06",
+      "author": "Raph_PH",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:BillieEilishO2140725-39_-_54665577407_(cropped).jpg",
+      "file": "BillieEilishO2140725-39_-_54665577407_(cropped).jpg"
+    },
+    {
+      "title": "Bad Bunny",
+      "resource": "Images/2a11ff08451c5e1c",
+      "author": "Toglenn",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Bad_Bunny_2019_by_Glenn_Francis_(cropped).jpg",
+      "file": "Bad_Bunny_2019_by_Glenn_Francis_(cropped).jpg"
+    },
+    {
+      "title": "Valorant",
+      "resource": "Images/351400511977f77a",
+      "author": "Riot Games",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Valorant_logo_-_pink_color_version.svg",
+      "file": "Valorant_logo_-_pink_color_version.svg"
+    },
+    {
+      "title": "Overwatch",
+      "resource": "Images/7255afeb8dc51bc1",
+      "author": "Blizzard Entertainment",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Overwatch.svg",
+      "file": "Overwatch.svg"
+    },
+    {
+      "title": "Michael Jordan",
+      "resource": "Images/82b8bfb786be10f7",
+      "author": "Zach Catanzareti Photo",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Michael_jordan_admad_rashad_(51276390562)_(cropped).jpg",
+      "file": "Michael_jordan_admad_rashad_(51276390562)_(cropped).jpg"
+    },
+    {
+      "title": "Sony",
+      "resource": "Images/24d4b80cfcba384d",
+      "author": "Akonnchiroll",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Sony_headquaters_2.jpg",
+      "file": "Sony_headquaters_2.jpg"
+    },
+    {
+      "title": "The Walt Disney Company",
+      "resource": "Images/7a15ab1e61262489",
+      "author": "Disney Enterprises, Inc.",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:The_Walt_Disney_company_logo.svg",
+      "file": "The_Walt_Disney_company_logo.svg"
+    },
+    {
+      "title": "Pixar",
+      "resource": "Images/7c4c313b617638ca",
+      "author": "Coolcaesar",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "url": "https://commons.wikimedia.org/wiki/File:Pixaranimationstudios.jpg",
+      "file": "Pixaranimationstudios.jpg"
+    },
+    {
+      "title": "Amazon (company)",
+      "resource": "Images/4c83296e73e6471f",
+      "author": "SounderBruce",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Amazon_Tower_I_topped_out,_June_2015.jpg",
+      "file": "Amazon_Tower_I_topped_out,_June_2015.jpg"
+    },
+    {
+      "title": "Shaquille O'Neal",
+      "resource": "Images/3e1979a3c2a74ad0",
+      "author": "TechCrunch",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:TechCrunch_Disrupt_2023_-_Day_1_(cropped).jpg",
+      "file": "TechCrunch_Disrupt_2023_-_Day_1_(cropped).jpg"
+    },
+    {
+      "title": "Serena Williams",
+      "resource": "Images/034287e608862dfd",
+      "author": "AndrewHenkelman",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Serena-Smiling-2020.png",
+      "file": "Serena-Smiling-2020.png"
+    },
+    {
+      "title": "Adidas",
+      "resource": "Images/d67d69111ce04ead",
+      "author": "Adidas",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "url": "https://commons.wikimedia.org/wiki/File:Adidas_2022_logo.svg",
+      "file": "Adidas_2022_logo.svg"
+    },
+    {
+      "title": "LeBron James",
+      "resource": "Images/8c0c3d21902dc158",
+      "author": "Erik Drost",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:LeBron_James_(51959977144)_(cropped2).jpg",
+      "file": "LeBron_James_(51959977144)_(cropped2).jpg"
+    },
+    {
+      "title": "Kobe Bryant",
+      "resource": "Images/64f59dc772cbbf3d",
+      "author": "Keith Allison",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Kobe_Bryant_Dec_2014.jpg",
+      "file": "Kobe_Bryant_Dec_2014.jpg"
+    },
+    {
+      "title": "Roger Federer",
+      "resource": "Images/7e0eb8d0f9fc958d",
+      "author": "Tatiana from Moscow, Russia",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Roger_Federer_2015_(cropped).jpg",
+      "file": "Roger_Federer_2015_(cropped).jpg"
+    },
+    {
+      "title": "Cristiano Ronaldo",
+      "resource": "Images/e52454355705cd26",
+      "author": "Bryan Berlin",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_Croatia_v_Portugal_2_July_2026-075_(cropped).jpg",
+      "file": "Cristiano_Ronaldo_Croatia_v_Portugal_2_July_2026-075_(cropped).jpg"
+    },
+    {
+      "title": "Marvel Studios",
+      "resource": "Images/6f60634211826894",
+      "author": "Coolcaesar",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Frankgwellsbuilding.JPG",
+      "file": "Frankgwellsbuilding.JPG"
+    },
+    {
+      "title": "Rafael Nadal",
+      "resource": "Images/728fba826ce4e4d6",
+      "author": "Barcex",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Rafael_Nadal_en_2024_(cropped).jpg",
+      "file": "Rafael_Nadal_en_2024_(cropped).jpg"
+    },
+    {
+      "title": "Lionel Messi",
+      "resource": "Images/f91a968380d15053",
+      "author": "Bryan Berlin",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Leo_Messi_Argentina_v_Egypt_7_July_2026-1.jpg",
+      "file": "Leo_Messi_Argentina_v_Egypt_7_July_2026-1.jpg"
+    },
+    {
+      "title": "Stephen Curry",
+      "resource": "Images/ed1f32931b8d6b5a",
+      "author": "Clément Bardot",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Stephen_Curry,_Olympic_Games_2024_(cropped).jpg",
+      "file": "Stephen_Curry,_Olympic_Games_2024_(cropped).jpg"
+    },
+    {
+      "title": "Kevin Durant",
+      "resource": "Images/fa55b76d6692fe81",
+      "author": "Clément Bardot",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Kevin_Durant,_Paris_2024_(cropped).jpg",
+      "file": "Kevin_Durant,_Paris_2024_(cropped).jpg"
+    },
+    {
+      "title": "Neymar",
+      "resource": "Images/ea2f8b45168ea920",
+      "author": "Bryan Berlin",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Neymar_Junior_Brazil_V_Morocco_13_June_2026-40.jpg",
+      "file": "Neymar_Junior_Brazil_V_Morocco_13_June_2026-40.jpg"
+    },
+    {
+      "title": "Nike, Inc.",
+      "resource": "Images/d35243fd91b663b8",
+      "author": "Gary Halvorson, Oregon State Archives",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Nike_Campus,_Beaverton_-_DPLA_-_ffa63f1bbaf5cd21aeada3d3978db2b0.jpg",
+      "file": "Nike_Campus,_Beaverton_-_DPLA_-_ffa63f1bbaf5cd21aeada3d3978db2b0.jpg"
+    },
+    {
+      "title": "Giannis Antetokounmpo",
+      "resource": "Images/fe73399837e9b29f",
+      "author": "Erik Drost",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Giannis_Antetokounmpo_(51915153421)_(cropped).jpg",
+      "file": "Giannis_Antetokounmpo_(51915153421)_(cropped).jpg"
+    },
+    {
+      "title": "Simone Biles",
+      "resource": "Images/9d090d97c7d00faf",
+      "author": "Ocoudis",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Simone_Biles_National_Team_2024.jpg",
+      "file": "Simone_Biles_National_Team_2024.jpg"
+    },
+    {
+      "title": "Naomi Osaka",
+      "resource": "Images/ae8f865f83ec8434",
+      "author": "AndrewHenkelman",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:NaomiOsaka-smile-2020_(cropped_tight).png",
+      "file": "NaomiOsaka-smile-2020_(cropped_tight).png"
+    },
+    {
+      "title": "Samsung",
+      "resource": "Images/3519312d19934f0a",
+      "author": "Oskar Alexanderson",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Samsung_headquarters.jpg",
+      "file": "Samsung_headquarters.jpg"
+    },
+    {
+      "title": "Kylian Mbappé",
+      "resource": "Images/6073bcb258c09b81",
+      "author": "Bryan Berlin",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Kylian_Mbappe_France_v_Senegal_16_June_2026-391_(cropped).jpg",
+      "file": "Kylian_Mbappe_France_v_Senegal_16_June_2026-391_(cropped).jpg"
+    },
+    {
+      "title": "Erling Haaland",
+      "resource": "Images/1cf7c9b264756edc",
+      "author": "Bryan Berlin",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg",
+      "file": "Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg"
+    }
+  ]
+}
